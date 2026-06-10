@@ -1,0 +1,5 @@
+{
+  "title": "TanStack Benchmark",
+  "description": "Performance results of AI coding models on TanStack tasks, measuring success rate and execution time with high precision.",
+  "github_repo": "https://github.com/kweizh/tanstack-benchmark"
+}
