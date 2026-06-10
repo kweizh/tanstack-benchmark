@@ -1,0 +1,26 @@
+{
+  "name": "myproject",
+  "version": "1.0.0",
+  "description": "Nested comment thread with TanStack Start + optimistic updates",
+  "type": "module",
+  "scripts": {
+    "dev": "PORT=47821 vinxi dev",
+    "build": "vinxi build",
+    "start": "npm run build && PORT=47821 node .output/server/index.mjs"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "5.101.0",
+    "@tanstack/react-query-devtools": "5.101.0",
+    "@tanstack/react-router": "1.120.20",
+    "@tanstack/react-router-with-query": "1.120.20",
+    "@tanstack/start": "1.120.20",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "vinxi": "0.5.3"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.7.0"
+  }
+}

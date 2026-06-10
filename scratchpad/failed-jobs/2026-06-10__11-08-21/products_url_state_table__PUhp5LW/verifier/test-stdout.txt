@@ -1,0 +1,183 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.2
+collected 9 items
+
+tests/test_final_state.py FFFFFFFFF                                      [100%]
+
+=================================== FAILURES ===================================
+_______________________ test_default_listing_pagination ________________________
+
+start_app = None
+
+    def test_default_listing_pagination(start_app):
+        r = requests.get(f"{BASE_URL}/api/products", timeout=15)
+>       assert r.status_code == 200, (
+            f"GET /api/products should return 200, got {r.status_code}: {r.text[:300]}"
+        )
+E       AssertionError: GET /api/products should return 200, got 501: <!DOCTYPE html><html><head><title>Server Error</title></head><body><h1>Server Error</h1><p>Something went wrong while processing your request.</p>
+E       assert 501 == 200
+E        +  where 501 = <Response [501]>.status_code
+
+tests/test_final_state.py:75: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/start_app$ npm run start
+process 'start_app' started pid=2696
+start_app process startup detected
+_______________________ test_category_filter_books_only ________________________
+
+start_app = None
+
+    def test_category_filter_books_only(start_app):
+        r = requests.get(
+            f"{BASE_URL}/api/products",
+            params={"category": "books", "pageSize": "20"},
+            timeout=15,
+        )
+>       assert r.status_code == 200, (
+            f"GET /api/products?category=books should return 200, got {r.status_code}: {r.text[:300]}"
+        )
+E       AssertionError: GET /api/products?category=books should return 200, got 501: <!DOCTYPE html><html><head><title>Server Error</title></head><body><h1>Server Error</h1><p>Something went wrong while processing your request.</p>
+E       assert 501 == 200
+E        +  where 501 = <Response [501]>.status_code
+
+tests/test_final_state.py:94: AssertionError
+___________________________ test_price_range_filter ____________________________
+
+start_app = None
+
+    def test_price_range_filter(start_app):
+        r = requests.get(
+            f"{BASE_URL}/api/products",
+            params={"minPrice": "50", "maxPrice": "100", "pageSize": "20"},
+            timeout=15,
+        )
+>       assert r.status_code == 200, (
+            f"GET /api/products?minPrice=50&maxPrice=100 should return 200, "
+            f"got {r.status_code}: {r.text[:300]}"
+        )
+E       AssertionError: GET /api/products?minPrice=50&maxPrice=100 should return 200, got 501: <!DOCTYPE html><html><head><title>Server Error</title></head><body><h1>Server Error</h1><p>Something went wrong while processing your request.</p>
+E       assert 501 == 200
+E        +  where 501 = <Response [501]>.status_code
+
+tests/test_final_state.py:115: AssertionError
+_________________________ test_sort_by_price_ascending _________________________
+
+start_app = None
+
+    def test_sort_by_price_ascending(start_app):
+        r = requests.get(
+            f"{BASE_URL}/api/products",
+            params={"sort": "price", "order": "asc", "pageSize": "12"},
+            timeout=15,
+        )
+>       assert r.status_code == 200, (
+            f"GET sorted by price asc should return 200, got {r.status_code}: {r.text[:300]}"
+        )
+E       AssertionError: GET sorted by price asc should return 200, got 501: <!DOCTYPE html><html><head><title>Server Error</title></head><body><h1>Server Error</h1><p>Something went wrong while processing your request.</p>
+E       assert 501 == 200
+E        +  where 501 = <Response [501]>.status_code
+
+tests/test_final_state.py:139: AssertionError
+_______________ test_search_substring_case_insensitive_keyboard ________________
+
+start_app = None
+
+    def test_search_substring_case_insensitive_keyboard(start_app):
+        r = requests.get(
+            f"{BASE_URL}/api/products",
+            params={"q": "keyboard", "pageSize": "20"},
+            timeout=15,
+        )
+>       assert r.status_code == 200, (
+            f"GET ?q=keyboard should return 200, got {r.status_code}: {r.text[:300]}"
+        )
+E       AssertionError: GET ?q=keyboard should return 200, got 501: <!DOCTYPE html><html><head><title>Server Error</title></head><body><h1>Server Error</h1><p>Something went wrong while processing your request.</p>
+E       assert 501 == 200
+E        +  where 501 = <Response [501]>.status_code
+
+tests/test_final_state.py:158: AssertionError
+________________ test_search_substring_case_insensitive_program ________________
+
+start_app = None
+
+    def test_search_substring_case_insensitive_program(start_app):
+        r = requests.get(
+            f"{BASE_URL}/api/products",
+            params={"q": "PROGRAM", "pageSize": "20"},
+            timeout=15,
+        )
+>       assert r.status_code == 200, (
+            f"GET ?q=PROGRAM should return 200, got {r.status_code}: {r.text[:300]}"
+        )
+E       AssertionError: GET ?q=PROGRAM should return 200, got 501: <!DOCTYPE html><html><head><title>Server Error</title></head><body><h1>Server Error</h1><p>Something went wrong while processing your request.</p>
+E       assert 501 == 200
+E        +  where 501 = <Response [501]>.status_code
+
+tests/test_final_state.py:180: AssertionError
+___________________ test_pagination_second_page_default_sort ___________________
+
+start_app = None
+
+    def test_pagination_second_page_default_sort(start_app):
+        r = requests.get(
+            f"{BASE_URL}/api/products",
+            params={"page": "2", "pageSize": "5"},
+            timeout=15,
+        )
+>       assert r.status_code == 200, (
+            f"GET ?page=2&pageSize=5 should return 200, got {r.status_code}: {r.text[:300]}"
+        )
+E       AssertionError: GET ?page=2&pageSize=5 should return 200, got 501: <!DOCTYPE html><html><head><title>Server Error</title></head><body><h1>Server Error</h1><p>Something went wrong while processing your request.</p>
+E       assert 501 == 200
+E        +  where 501 = <Response [501]>.status_code
+
+tests/test_final_state.py:202: AssertionError
+______________________ test_invalid_category_returns_400 _______________________
+
+start_app = None
+
+    def test_invalid_category_returns_400(start_app):
+        r = requests.get(
+            f"{BASE_URL}/api/products",
+            params={"category": "invalid"},
+            timeout=15,
+        )
+>       assert r.status_code == 400, (
+            f"GET ?category=invalid must return HTTP 400, got {r.status_code}: {r.text[:300]}"
+        )
+E       AssertionError: GET ?category=invalid must return HTTP 400, got 501: <!DOCTYPE html><html><head><title>Server Error</title></head><body><h1>Server Error</h1><p>Something went wrong while processing your request.</p>
+E       assert 501 == 400
+E        +  where 501 = <Response [501]>.status_code
+
+tests/test_final_state.py:221: AssertionError
+________________________ test_html_route_filters_books _________________________
+
+start_app = None
+
+    def test_html_route_filters_books(start_app):
+        r = requests.get(
+            f"{BASE_URL}/products",
+            params={"category": "books"},
+            timeout=20,
+        )
+>       assert r.status_code == 200, (
+            f"GET /products?category=books should return 200, got {r.status_code}: {r.text[:300]}"
+        )
+E       AssertionError: GET /products?category=books should return 200, got 501: <!DOCTYPE html><html><head><title>Server Error</title></head><body><h1>Server Error</h1><p>Something went wrong while processing your request.</p>
+E       assert 501 == 200
+E        +  where 501 = <Response [501]>.status_code
+
+tests/test_final_state.py:238: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_final_state.py::test_default_listing_pagination - Assertion...
+FAILED tests/test_final_state.py::test_category_filter_books_only - Assertion...
+FAILED tests/test_final_state.py::test_price_range_filter - AssertionError: G...
+FAILED tests/test_final_state.py::test_sort_by_price_ascending - AssertionErr...
+FAILED tests/test_final_state.py::test_search_substring_case_insensitive_keyboard
+FAILED tests/test_final_state.py::test_search_substring_case_insensitive_program
+FAILED tests/test_final_state.py::test_pagination_second_page_default_sort - ...
+FAILED tests/test_final_state.py::test_invalid_category_returns_400 - Asserti...
+FAILED tests/test_final_state.py::test_html_route_filters_books - AssertionEr...
+========================= 9 failed in 61.67s (0:01:01) =========================

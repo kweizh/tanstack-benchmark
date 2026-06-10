@@ -1,0 +1,66 @@
+- Initializing MCP connections...
+You
+# Optimistic Update for Nested Comments with TanStack Query ## Background Create a nested comment system that demonstrates an "Optimistic Update" flow using TanStack Query and React. Optimistic updates make the UI feel snappy by updating the local state immediately while the server request is still pending. ## Requirements * Build a React frontend and a simple Node.js/Express backend. * The backend should maintain an in-memory array of comments. Each comment has an `id`, `text`, and `parentId` (null for top-level comments). * The frontend should fetch and display the comments in a nested/threaded structure. * Users can add a new top-level comment. * When adding a comment, the frontend MUST use TanStack Query's optimistic updates to immediately display the new comment in the UI before the server responds. * The backend MUST have an artificial delay (exactly 1000ms) on the POST route to make the optimistic update observable. ## Implementation Hints * Set up a Vite React project and an Express server. You can serve the built React app from Express or run them concurrently. * Use `useQuery` to fetch the list of comments from the backend. * Use `useMutation` for adding a new comment. In the `onMutate` callback, cancel any outgoing refetches for the comments query, snapshot the previous value, and optimistically update the cache with the new comment. * Use `onError` to roll back the cache if the mutation fails, and `onSettled` to invalidate the query and ensure the UI is in sync with the server. ## Acceptance Criteria * Project path: /home/user/project * Start command: npm run start * Port: 5732 * API Endpoints: * GET `/api/comments`: Returns status 200 and a JSON array of comments. ```json [ { "id": "string", "text": "string", "parentId": "string | null" } ] ``` * POST `/api/comments`: Accepts a JSON body with `text` and `parentId`. It MUST wait for 1000ms, generate an `id`, add it to the in-memory store, and return 201 Created with the new comment object. * Frontend UI: * Accessible at `http://localhost:5732/`. * Displays the list of comments. * Contains a form with a text input (with `name="commentText"` or `id="commentText"`) and a submit button (with `id="submitComment"` or text "Submit"). * Submitting the form MUST immediately (within 100ms) render the new comment text on the page using TanStack Query optimistic updates, while the 1000ms server request is pending.   
+
+Pochi
+💭 Thinking for 433 characters   
+📋 Updating todo list (5 items) ✔ 
+💭 Thinking for 47 characters   
+💫 Executing mkdir -p /home/user/project ✔ 
+💭 Thinking for 59 characters   
+✏️  Writing /home/user/project/package.json ✔ 
+✏️  Writing /home/user/project/vite.config.js ✔ 
+✏️  Writing /home/user/project/server.js ✔ 
+📋 Updating todo list (5 items) ✔ 
+Now let me create the React frontend files:   
+💫 Executing mkdir -p /home/user/project/src ✔ 
+✏️  Writing /home/user/project/index.html ✔ 
+✏️  Writing /home/user/project/src/main.jsx ✔ 
+✏️  Writing /home/user/project/src/App.jsx ✔ 
+📋 Updating todo list (5 items) ✔ 
+💭 Thinking for 72 characters   
+Now let me install dependencies and build the project:   
+💫 Executing cd /home/user/project && npm install ✔ 
+💫 Executing cd /home/user/project && npm run build ✔ 
+💭 Thinking for 60 characters   
+Build succeeded. Let me start the server and verify it works:   
+🛠️ Tool startBackgroundJob ✔ 
+💫 Executing sleep 2 && curl -s http://localhost:5732/api/comments ✔ 
+💫 Executing curl -s http://localhost:5732/ | head -20 ✔ 
+💫 Executing time curl -s -X POST http://localhost:5732/api/comments -H "Content-Type: application/json" -d '{"text":"Test optimistic comment","parentId":null}' ✔ 
+💭 Thinking for 159 characters   
+💫 Executing curl -s -o /dev/null -w "%{http_code}" -X POST http://localhost:5732/api/comments -H "Content-Type: application/json" -d '{"text":"Status test","parentId":null}' ✔ 
+All endpoints are working correctly. The POST returns 201 after the 1000ms delay, and the frontend is served from the root. Let me stop the background job:   
+🛠️ Tool killBackgroundJob ✔ 
+📋 Updating todo list (5 items) ✔ 
+🎉 Task Completed
+The nested comment system with optimistic updates is complete at `/home/user/project`.
+
+**Project structure:**
+- `server.js` — Express backend serving the API and built React app on port 5732
+- `src/App.jsx` — React frontend with TanStack Query optimistic updates
+- `src/main.jsx` — React entry point with QueryClientProvider
+- `index.html` — HTML shell
+- `vite.config.js` — Vite config with API proxy for dev mode
+
+**How it works:**
+
+**Backend (`server.js`):**
+- In-memory array of comments with `id`, `text`, and `parentId` fields
+- `GET /api/comments` — returns all comments (status 200)
+- `POST /api/comments` — accepts `{text, parentId}`, waits exactly 1000ms, generates an `id`, adds to store, returns 201 with the new comment
+- Serves the built React app as a static SPA
+
+**Frontend (`App.jsx`):**
+- Uses `useQuery` with key `['comments']` to fetch and display comments
+- Builds a nested tree structure from the flat comment list (children nested under parents via `parentId`)
+- Uses `useMutation` with optimistic update pattern:
+  - `onMutate`: cancels outgoing refetches, snapshots previous data, immediately inserts an optimistic comment into the cache
+  - `onError`: rolls back to the snapshot if the mutation fails
+  - `onSettled`: invalidates the query to sync with the server
+- Form has `id="commentText"` input and `id="submitComment"` submit button
+
+**Start command:** `npm run start` — builds the React app (if needed) and starts the Express server on port 5732.   
+- Waiting for background jobs to complete (timeout: 60000ms)...
+✖ Async wait timeout reached. Remaining: 1 job(s)
+  

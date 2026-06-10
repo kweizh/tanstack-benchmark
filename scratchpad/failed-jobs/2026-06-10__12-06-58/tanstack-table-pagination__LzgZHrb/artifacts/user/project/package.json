@@ -1,0 +1,21 @@
+{
+  "name": "tanstack-table-demo",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"node server.js\" \"vite --port 5173\"",
+    "build": "vite build",
+    "start": "npm run build && node server.js"
+  },
+  "dependencies": {
+    "@tanstack/react-table": "^8.20.5",
+    "express": "^4.18.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^8.2.2",
+    "vite": "^5.1.4"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "_client-BPbXyjIc.js": {
+    "file": "assets/client-BPbXyjIc.js",
+    "name": "client",
+    "dynamicImports": [
+      "app/routes/products.tsx?tsr-split=component",
+      "app/routes/index.tsx?tsr-split=component"
+    ]
+  },
+  "app/routes/index.tsx?tsr-split=component": {
+    "file": "assets/index-DXbrJ3OQ.js",
+    "name": "index",
+    "src": "app/routes/index.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "_client-BPbXyjIc.js"
+    ]
+  },
+  "app/routes/products.tsx?tsr-split=component": {
+    "file": "assets/products-DH7BoXjR.js",
+    "name": "products",
+    "src": "app/routes/products.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "_client-BPbXyjIc.js"
+    ]
+  },
+  "virtual:$vinxi/handler/client": {
+    "file": "assets/client-BkWdUXpA.js",
+    "name": "client",
+    "src": "virtual:$vinxi/handler/client",
+    "isEntry": true,
+    "imports": [
+      "_client-BPbXyjIc.js"
+    ]
+  }
+}

@@ -1,0 +1,199 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.2
+collected 4 items
+
+tests/test_final_state.py EEEE                                           [100%]
+
+==================================== ERRORS ====================================
+_________________ ERROR at setup of test_initial_list_is_array _________________
+
+xprocess = <xprocess.xprocess.XProcess object at 0x7fddebd9a870>
+
+    @pytest.fixture(scope="session")
+    def start_app(xprocess):
+        """Start the candidate's TanStack Start server on the hard-coded port."""
+    
+        class Starter(ProcessStarter):
+            name = "tanstack_optimistic_comments_app"
+            # `npm run start` should serve the production build configured to listen on PORT.
+            args = ["npm", "run", "start"]
+            env = os.environ.copy()
+            env["PORT"] = str(PORT)
+            popen_kwargs = {
+                "cwd": PROJECT_DIR,
+                "text": True,
+            }
+            timeout = 240
+            terminate_on_interrupt = True
+    
+            def startup_check(self) -> bool:
+                return _port_open("127.0.0.1", PORT)
+    
+        xprocess.ensure(Starter.name, Starter)
+    
+        # Give the server a small grace period beyond raw TCP readiness so it
+        # is fully accepting HTTP requests.
+        deadline = time.time() + 30
+        last_err: Exception | None = None
+        while time.time() < deadline:
+            try:
+                resp = requests.get(f"{BASE_URL}/api/comments", timeout=5)
+                if resp.status_code == 200:
+                    break
+            except Exception as exc:  # noqa: BLE001
+                last_err = exc
+            time.sleep(0.5)
+        else:  # pragma: no cover - only triggered when server never becomes ready
+>           raise RuntimeError(
+                f"Server on port {PORT} did not respond successfully to GET /api/comments: {last_err}"
+            )
+E           RuntimeError: Server on port 47821 did not respond successfully to GET /api/comments: None
+
+tests/test_final_state.py:60: RuntimeError
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/tanstack_optimistic_comments_app$ npm run start
+process 'tanstack_optimistic_comments_app' started pid=1714
+tanstack_optimistic_comments_app process startup detected
+________________ ERROR at setup of test_post_top_level_comment _________________
+
+xprocess = <xprocess.xprocess.XProcess object at 0x7fddebd9a870>
+
+    @pytest.fixture(scope="session")
+    def start_app(xprocess):
+        """Start the candidate's TanStack Start server on the hard-coded port."""
+    
+        class Starter(ProcessStarter):
+            name = "tanstack_optimistic_comments_app"
+            # `npm run start` should serve the production build configured to listen on PORT.
+            args = ["npm", "run", "start"]
+            env = os.environ.copy()
+            env["PORT"] = str(PORT)
+            popen_kwargs = {
+                "cwd": PROJECT_DIR,
+                "text": True,
+            }
+            timeout = 240
+            terminate_on_interrupt = True
+    
+            def startup_check(self) -> bool:
+                return _port_open("127.0.0.1", PORT)
+    
+        xprocess.ensure(Starter.name, Starter)
+    
+        # Give the server a small grace period beyond raw TCP readiness so it
+        # is fully accepting HTTP requests.
+        deadline = time.time() + 30
+        last_err: Exception | None = None
+        while time.time() < deadline:
+            try:
+                resp = requests.get(f"{BASE_URL}/api/comments", timeout=5)
+                if resp.status_code == 200:
+                    break
+            except Exception as exc:  # noqa: BLE001
+                last_err = exc
+            time.sleep(0.5)
+        else:  # pragma: no cover - only triggered when server never becomes ready
+>           raise RuntimeError(
+                f"Server on port {PORT} did not respond successfully to GET /api/comments: {last_err}"
+            )
+E           RuntimeError: Server on port 47821 did not respond successfully to GET /api/comments: None
+
+tests/test_final_state.py:60: RuntimeError
+____________ ERROR at setup of test_forced_failure_does_not_persist ____________
+
+xprocess = <xprocess.xprocess.XProcess object at 0x7fddebd9a870>
+
+    @pytest.fixture(scope="session")
+    def start_app(xprocess):
+        """Start the candidate's TanStack Start server on the hard-coded port."""
+    
+        class Starter(ProcessStarter):
+            name = "tanstack_optimistic_comments_app"
+            # `npm run start` should serve the production build configured to listen on PORT.
+            args = ["npm", "run", "start"]
+            env = os.environ.copy()
+            env["PORT"] = str(PORT)
+            popen_kwargs = {
+                "cwd": PROJECT_DIR,
+                "text": True,
+            }
+            timeout = 240
+            terminate_on_interrupt = True
+    
+            def startup_check(self) -> bool:
+                return _port_open("127.0.0.1", PORT)
+    
+        xprocess.ensure(Starter.name, Starter)
+    
+        # Give the server a small grace period beyond raw TCP readiness so it
+        # is fully accepting HTTP requests.
+        deadline = time.time() + 30
+        last_err: Exception | None = None
+        while time.time() < deadline:
+            try:
+                resp = requests.get(f"{BASE_URL}/api/comments", timeout=5)
+                if resp.status_code == 200:
+                    break
+            except Exception as exc:  # noqa: BLE001
+                last_err = exc
+            time.sleep(0.5)
+        else:  # pragma: no cover - only triggered when server never becomes ready
+>           raise RuntimeError(
+                f"Server on port {PORT} did not respond successfully to GET /api/comments: {last_err}"
+            )
+E           RuntimeError: Server on port 47821 did not respond successfully to GET /api/comments: None
+
+tests/test_final_state.py:60: RuntimeError
+______________ ERROR at setup of test_html_renders_comment_bodies ______________
+
+xprocess = <xprocess.xprocess.XProcess object at 0x7fddebd9a870>
+
+    @pytest.fixture(scope="session")
+    def start_app(xprocess):
+        """Start the candidate's TanStack Start server on the hard-coded port."""
+    
+        class Starter(ProcessStarter):
+            name = "tanstack_optimistic_comments_app"
+            # `npm run start` should serve the production build configured to listen on PORT.
+            args = ["npm", "run", "start"]
+            env = os.environ.copy()
+            env["PORT"] = str(PORT)
+            popen_kwargs = {
+                "cwd": PROJECT_DIR,
+                "text": True,
+            }
+            timeout = 240
+            terminate_on_interrupt = True
+    
+            def startup_check(self) -> bool:
+                return _port_open("127.0.0.1", PORT)
+    
+        xprocess.ensure(Starter.name, Starter)
+    
+        # Give the server a small grace period beyond raw TCP readiness so it
+        # is fully accepting HTTP requests.
+        deadline = time.time() + 30
+        last_err: Exception | None = None
+        while time.time() < deadline:
+            try:
+                resp = requests.get(f"{BASE_URL}/api/comments", timeout=5)
+                if resp.status_code == 200:
+                    break
+            except Exception as exc:  # noqa: BLE001
+                last_err = exc
+            time.sleep(0.5)
+        else:  # pragma: no cover - only triggered when server never becomes ready
+>           raise RuntimeError(
+                f"Server on port {PORT} did not respond successfully to GET /api/comments: {last_err}"
+            )
+E           RuntimeError: Server on port 47821 did not respond successfully to GET /api/comments: None
+
+tests/test_final_state.py:60: RuntimeError
+=========================== short test summary info ============================
+ERROR tests/test_final_state.py::test_initial_list_is_array - RuntimeError: S...
+ERROR tests/test_final_state.py::test_post_top_level_comment - RuntimeError: ...
+ERROR tests/test_final_state.py::test_forced_failure_does_not_persist - Runti...
+ERROR tests/test_final_state.py::test_html_renders_comment_bodies - RuntimeEr...
+============================== 4 errors in 31.18s ==============================

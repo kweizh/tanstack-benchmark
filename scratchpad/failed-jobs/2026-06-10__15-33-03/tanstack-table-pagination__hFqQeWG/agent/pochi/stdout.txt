@@ -1,0 +1,68 @@
+- Initializing MCP connections...
+You
+# TanStack Table Server-Side Pagination & Sorting ## Background Build a web application using TanStack Table that demonstrates server-side pagination and server-side sorting. ## Requirements * Initialize a React project with a Node.js backend (or use TanStack Start for a full-stack approach). * Create a dataset of 50 mock items on the server. Each item must have the following fields: * `id` (number, 1 to 50) * `name` (string, e.g., "Item 1" to "Item 50") * `value` (number, e.g., 100 to 5000) * Expose a REST API endpoint to fetch the data with pagination and sorting parameters. * Build a frontend UI using TanStack Table to display this data. * Implement server-side pagination (10 items per page by default). * Implement server-side sorting (clicking a column header requests sorted data from the server). * The application MUST run on port 8321. ## Implementation Hints * Use `useReactTable` with `manualPagination: true` and `manualSorting: true`. * Keep track of `pagination` and `sorting` states in your React component and use them as dependencies to fetch data from the backend. * For the backend, an Express server or TanStack Start server functions can be used. If using a separate backend, ensure CORS is handled or serve the React app from the same server. ## Acceptance Criteria * Project path: /home/user/project * Start command: npm run start * Port: 8321 * API Endpoint: * `GET /api/data?page=<page_number>&limit=<items_per_page>&sortBy=<column_name>&sortDesc=<true|false>` * The `page` parameter should be 1-indexed. * The response must be JSON in the format: `{ "data": [...], "totalCount": 50 }`. * UI Requirements: * The root URL `http://localhost:8321/` must render a table displaying the `id`, `name`, and `value` columns. * The table must include a "Next" button and a "Previous" button for pagination. * Clicking the `value` column header must toggle the sorting order and fetch the sorted data from the server.   
+
+Pochi
+💭 Thinking for 608 characters   
+📋 Updating todo list (6 items) ✔ 
+💭 Thinking for 47 characters   
+💫 Executing mkdir -p /home/user/project ✔ 
+💭 Thinking for 76 characters   
+✏️  Writing /home/user/project/package.json ✔ 
+📋 Updating todo list (6 items) ✔ 
+💭 Thinking for 73 characters   
+✏️  Writing /home/user/project/server.js ✔ 
+📋 Updating todo list (6 items) ✔ 
+Now let me create the Vite config and the React frontend files.   
+✏️  Writing /home/user/project/vite.config.js ✔ 
+✏️  Writing /home/user/project/index.html ✔ 
+💫 Executing mkdir -p /home/user/project/src ✔ 
+✏️  Writing /home/user/project/src/main.jsx ✔ 
+📋 Updating todo list (6 items) ✔ 
+Now let me create the main App component with TanStack Table implementation:   
+✏️  Writing /home/user/project/src/App.jsx ✔ 
+💭 Thinking for 54 characters   
+📋 Updating todo list (6 items) ✔ 
+💫 Executing cd /home/user/project && npm install ✔ 
+💭 Thinking for 60 characters   
+💫 Executing cd /home/user/project && npm run build ✔ 
+Build succeeded. Now let me start the server and test it:   
+🛠️ Tool startBackgroundJob ✔ 
+💫 Executing sleep 2 && curl -s http://localhost:8321/api/data?page=1&limit=10 | head -200 ✔ 
+💫 Executing curl -s "http://localhost:8321/api/data?page=2&limit=10&sortBy=value&sortDesc=true" ✔ 
+💭 Thinking for 79 characters   
+💫 Executing curl -s http://localhost:8321/ | head -20 ✔ 
+📋 Updating todo list (6 items) ✔ 
+🛠️ Tool killBackgroundJob ✔ 
+All tasks are complete. Let me verify the final project structure:   
+📂 Listing files in /home/user/project recursively ✔ 
+💭 Thinking for 103 characters   
+The project is fully built and tested. Let me present the result.   
+🎉 Task Completed
+The TanStack Table server-side pagination and sorting application has been built and is ready to run at `/home/user/project`.
+
+## Project Structure
+
+- **`server.js`** — Express server that serves the REST API and the built React app
+- **`src/App.jsx`** — React component using TanStack Table with `manualPagination: true` and `manualSorting: true`
+- **`src/main.jsx`** — React entry point
+- **`index.html`** — HTML template
+- **`vite.config.js`** — Vite build configuration
+- **`package.json`** — Dependencies and scripts
+
+## Key Implementation Details
+
+- **Backend**: Express server on port 8321 with endpoint `GET /api/data?page=<page>&limit=<limit>&sortBy=<column>&sortDesc=<true|false>` returning `{ "data": [...], "totalCount": 50 }`
+- **Frontend**: React + TanStack Table with server-side pagination (10 items/page) and sorting on the `value` column
+- **Data**: 50 mock items with `id` (1–50), `name` ("Item 1"–"Item 50"), and `value` (100–5000)
+- **Pagination**: Previous/Next buttons with page indicator
+- **Sorting**: Clicking the `value` column header toggles between asc/desc/no sort, fetching sorted data from the server
+
+## Start Command
+
+```bash
+cd /home/user/project && npm run start
+```
+
+This runs `node server.js`, which serves the pre-built React app and the API on port 8321.   
+  

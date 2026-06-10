@@ -1,0 +1,21 @@
+{
+  "name": "optimistic-comments",
+  "version": "1.0.0",
+  "description": "Optimistic Updates with TanStack Query and React",
+  "main": "server.js",
+  "scripts": {
+    "build": "vite build",
+    "start": "npm run build && node server.js",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.45.1",
+    "express": "^4.19.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.3.1"
+  }
+}

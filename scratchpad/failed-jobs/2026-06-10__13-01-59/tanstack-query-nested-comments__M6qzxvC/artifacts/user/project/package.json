@@ -1,0 +1,14 @@
+{
+  "name": "nested-comments",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server/index.js",
+    "build": "cd client && npm run build",
+    "dev": "concurrently \"node server/index.js\" \"cd client && npm run dev\""
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "uuid": "^9.0.0"
+  }
+}

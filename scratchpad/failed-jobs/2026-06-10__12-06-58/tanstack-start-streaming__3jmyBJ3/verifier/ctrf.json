@@ -1,0 +1,50 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-06-10T12:25:24.119093+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 2,
+            "passed": 1,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1781094321011,
+            "stop": 1781094324118
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_port_availability",
+                "status": "passed",
+                "duration": 2882,
+                "start": 1781094321163,
+                "stop": 1781094324045,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_streaming_ssr_and_final_data",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 72,
+                "start": 1781094324046,
+                "stop": 1781094324118,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_streaming_ssr_and_final_data(start_app):\n        url = f\"http://localhost:{PORT}/dashboard\"\n        start_time = time.time()\n    \n        # Use stream=True to read the response as it arrives\n        response = requests.get(url, stream=True)\n>       assert response.status_code == 200, f\"Expected status 200, got {response.status_code}\"\nE       AssertionError: Expected status 200, got 503\nE       assert 503 == 200\nE        +  where 503 = <Response [503]>.status_code\n\ntests/test_final_state.py:49: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

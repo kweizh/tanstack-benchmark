@@ -1,0 +1,21 @@
+{
+  "name": "tanstack-table-demo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:client": "vite",
+    "build": "vite build",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@tanstack/react-table": "^8.20.5",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.2",
+    "vite": "^5.4.8"
+  }
+}

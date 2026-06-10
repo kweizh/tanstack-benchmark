@@ -1,0 +1,216 @@
+- Initializing MCP connections...
+You
+# URL-Driven Product Search with TanStack Router + TanStack Table ## Background Build a small full-stack application with **TanStack Start** that exposes a `/products` page. The page must render a paginated, sortable, filterable product table whose **entire state lives in the URL search params**. The same params drive a server-side REST endpoint that returns the rows the table should display. The goal of the task is to exercise TanStack Router's typed search-param validation (via Zod), TanStack Table's `manualPagination` / `manualSorting` / `manualFiltering` modes, and loader-based data fetching keyed off the validated search params. ## Requirements * A `/products` route built with TanStack Router file-based routing inside a TanStack Start app. * The route must declare its search-param schema with **Zod** through `validateSearch` and load data via a `loader` that reads the validated search params. * The visible table must be rendered with **TanStack Table** in fully controlled mode: `manualPagination: true`, `manualSorting: true`, `manualFiltering: true`. The table's `state` (pagination, sorting, global filter / column filters) and the URL search params must stay in sync — changing a control updates the URL, and pasting a URL produces the same table state on a cold reload. * A REST endpoint `GET /api/products` served by the same TanStack Start server. The endpoint reads the same query parameters as the page, performs the filtering / sorting / pagination **server-side**, and returns JSON. * A fixed in-memory seed dataset of 12 products (see *Seed Dataset* below). The app must ship exactly this dataset — do not add, remove, or rename items. * The app must listen on the port specified in *Acceptance Criteria*. ## Seed Dataset The server must use exactly these 12 products as the only source of truth. Field types: `id: number`, `name: string`, `category: "books" | "tech" | "home"`, `price: number`. | id | name | category | price | | -- | ------------------------ | -------- | ------ | | 1 | JavaScript Programming | books | 35.50 | | 2 | The Pragmatic Programmer | books | 42.00 | | 3 | Design Patterns | books | 55.00 | | 4 | Clean Code | books | 39.99 | | 5 | Wireless Mouse | tech | 25.00 | | 6 | Mechanical Keyboard | tech | 89.99 | | 7 | USB-C Hub | tech | 49.50 | | 8 | 4K Monitor | tech | 320.00 | | 9 | Coffee Maker | home | 75.00 | | 10 | Vacuum Cleaner | home | 145.00 | | 11 | Desk Lamp | home | 32.00 | | 12 | Throw Pillow | home | 18.99 | ## URL / REST Contract Both `/products` (HTML) and `/api/products` (JSON) accept the same query parameters: * `q` (string, optional) — case-insensitive substring match against `name`. * `category` (optional) — one of `books`, `tech`, `home`. * `minPrice` (number, optional) — inclusive lower bound on `price`. * `maxPrice` (number, optional) — inclusive upper bound on `price`. * `sort` (optional) — one of `id`, `name`, `price`, `category`. Default `id`. * `order` (optional) — `asc` or `desc`. Default `asc`. * `page` (integer, optional, 1-based). Default `1`. * `pageSize` (integer, optional). Default `5`. Response body for `GET /api/products` (HTTP 200): ```json { "rows": [{ "id": number, "name": string, "category": string, "price": number }], "total": number, "page": number, "pageSize": number } ``` * `total` is the count after filters, before pagination. * `rows` is the page slice after filtering, sorting, and pagination. Validation: * Any query parameter that fails validation (e.g. `category=invalid`, `order=sideways`, `page=-1`, non-numeric `minPrice`) must respond with HTTP **400** and JSON body `{ "error": string }`. * The same validation rules must be enforced on the page route — invalid search params should not crash the server. ## Implementation Hints * Initialize a TanStack Start project (e.g. `npx @tanstack/cli@latest create`) and develop inside `/home/user/myproject`. Make sure the dev/start command listens on the port specified below. * Use a single Zod schema as the source of truth for both `validateSearch` on the route and the API handler's parameter parsing — share it between the two so the rules stay aligned. * Reach for TanStack Start's Server Routes (file-based API routes) to host `/api/products` inside the same app, so the API and the HTML page share a process and a port. * In the route's `loader`, build a `fetch` URL using the validated search params and hydrate the page with the JSON the API returns. * Configure TanStack Table with `manualPagination`, `manualSorting`, `manualFiltering`, and pass `pageCount` derived from `total / pageSize`. Drive `onPaginationChange` / `onSortingChange` by navigating to a new set of search params. * The HTML response for `/products` must contain the human-readable product names of the rows currently being shown so they can be matched as substrings — don't hide them in JSON-only payloads or images. ## Acceptance Criteria * Project path: /home/user/myproject * Start command: npm run start * Port: 42101 * Routes / endpoints: * `GET /products` — HTML page rendered by TanStack Start. The HTML must contain the names of the product rows currently displayed (as plain text substrings). * `GET /api/products` — JSON endpoint following the URL / REST contract above. Response shape: `{ rows, total, page, pageSize }`. Defaults: `page=1`, `pageSize=5`, `sort=id`, `order=asc`. * The server must enforce the validation rules described above and respond with HTTP 400 + `{ "error": string }` for invalid parameters. * The fixed 12-product dataset described in *Seed Dataset* must be the only data served.   
+
+Pochi
+💭 Thinking for 235 characters   
+📂 Listing files in /home/user ✔ 
+📂 Listing files in /home/user/myproject recursively ✔ 
+💭 Thinking for 557 characters   
+📋 Updating todo list (7 items) ✔ 
+💭 Thinking for 350 characters   
+💫 Executing node -v && npm -v ✔ 
+💫 Executing npx @tanstack/cli create --help ✔ 
+💭 Thinking for 303 characters   
+💫 Executing npx @tanstack/cli@latest create --framework React --package-manager npm --non-interactive --no-git --target-dir /home/user/myproject --force myproject ✔ 
+📂 Listing files in /home/user/myproject recursively ✔ 
+📋 Updating todo list (7 items) ✔ 
+🔍 Searching for **/*.ts* in /home/user/myproject/src ✔ 
+📖 Reading /home/user/myproject/src/routes/__root.tsx ✔ 
+📖 Reading /home/user/myproject/src/components/Header.tsx ✔ 
+📖 Reading /home/user/myproject/package.json ✔ 
+💭 Thinking for 321 characters   
+📖 Reading /home/user/myproject/vite.config.ts ✔ 
+💭 Thinking for 361 characters   
+📂 Listing files in /home/user/myproject/node_modules/.bin ✔ 
+💭 Thinking for 296 characters   
+📖 Reading /home/user/myproject/src/router.tsx ✔ 
+💭 Thinking for 254 characters   
+💫 Executing npm run build ✔ 
+💭 Thinking for 620 characters   
+📂 Listing files in /home/user/myproject/src recursively ✔ 
+💭 Thinking for 292 characters   
+🔍 Searching for PORT in /home/user/myproject/dist/server ✔ 
+🔍 Searching for listen|port in /home/user/myproject/dist/server ✔ 
+💭 Thinking for 278 characters   
+💫 Executing npx @tanstack/cli --help ✔ 
+💭 Thinking for 274 characters   
+📖 Reading /home/user/myproject/node_modules/@tanstack/react-start/package.json ✔ 
+💭 Thinking for 322 characters   
+💫 Executing ls -la node_modules/.bin ✔ 
+💫 Executing npx srvx --help ✔ 
+💭 Thinking for 1560 characters   
+✏️  Writing /home/user/myproject/src/products-schema.ts ✔ 
+💭 Thinking for 998 characters   
+📂 Listing files in /home/user/myproject/src/routes ✔ 
+🔍 Searching for createAPI|createAPIFileRoute in /home/user/myproject/node_modules/@tanstack/react-start ✔ 
+📖 Reading /home/user/myproject/node_modules/@tanstack/react-start/skills/react-start/server-components/examples/06-low-level-flight-api-route.tsx ✔ 
+🔍 Searching for createAPIFileRoute in /home/user/myproject/node_modules/@tanstack ✔ 
+🔍 Searching for createAPIFileRoute in /home/user/myproject/node_modules/@tanstack/start-server-core ✔ 
+🔍 Searching for createAPIFileRoute in /home/user/myproject/node_modules ✔ 
+🔍 Searching for createAPIFileRoute in *.d.ts files in /home/user/myproject/node_modules/@tanstack/react-start/dist ✔ 
+🔍 Searching for createAPIFileRoute in *.d.ts files in /home/user/myproject/node_modules/@tanstack ✔ 
+💭 Thinking for 322 characters   
+📂 Listing files in /home/user/myproject/node_modules/@tanstack/react-start ✔ 
+🔍 Searching for **/api* in /home/user/myproject/node_modules/@tanstack/react-start ✔ 
+💭 Thinking for 339 characters   
+🛠️ Tool webSearch ✔ 
+💭 Thinking for 216 characters   
+📖 Reading /home/user/myproject/tsr.config.json ✔ 
+💭 Thinking for 1657 characters   
+✏️  Writing /home/user/myproject/src/routes/api.products.ts ✔ 
+💫 Executing npm run generate-routes ✔ 
+💭 Thinking for 362 characters   
+🛠️ Tool webSearch ✔ 
+💭 Thinking for 282 characters   
+🔍 Searching for **/*api* in /home/user/myproject ✔ 
+💭 Thinking for 283 characters   
+🔍 Searching for createStartHandler in /home/user/myproject ✔ 
+💭 Thinking for 984 characters   
+🔧 Applying diff to /home/user/myproject/package.json ✔ 
+📖 Reading /home/user/myproject/src/routes/about.tsx ✔ 
+💭 Thinking for 1803 characters   
+💫 Executing npm install @tanstack/react-table ✔ 
+💭 Thinking for 1566 characters   
+📖 Reading /home/user/myproject/src/styles.css ✔ 
+📖 Reading /home/user/myproject/src/routes/index.tsx ✔ 
+💭 Thinking for 265 characters   
+🔧 Applying diff to /home/user/myproject/src/components/Header.tsx ✔ 
+💭 Thinking for 2095 characters   
+✏️  Writing /home/user/myproject/src/routes/products.tsx ✔ 
+💫 Executing npm run generate-routes ✔ 
+🔍 Searching for products in /home/user/myproject/src/routeTree.gen.ts ✔ 
+💭 Thinking for 561 characters   
+💫 Executing npm run build ✖ "Command exited with code 1"
+💭 Thinking for 262 characters   
+📖 Reading /home/user/myproject/src/routes/products.tsx ✔ 
+🔧 Applying diff to /home/user/myproject/src/routes/products.tsx ✔ 
+💫 Executing npm run build ✔ 
+🛠️ Tool startBackgroundJob ✔ 
+🛠️ Tool readBackgroundJobOutput ✔ 
+💫 Executing curl -s http://localhost:42101/api/products ✔ 
+🛠️ Tool readBackgroundJobOutput ✔ 
+💭 Thinking for 915 characters   
+💫 Executing rm src/routes/api.products.ts && mkdir -p src/routes/api ✔ 
+💭 Thinking for 314 characters   
+✏️  Writing /home/user/myproject/src/routes/api/products.ts ✔ 
+💫 Executing npm run generate-routes ✔ 
+💭 Thinking for 277 characters   
+💫 Executing npm run build ✔ 
+💭 Thinking for 1489 characters   
+🔍 Searching for createAPIFileRoute in /home/user/myproject/node_modules/@tanstack ✔ 
+💭 Thinking for 295 characters   
+📖 Reading /home/user/myproject/node_modules/@tanstack/react-start/package.json ✔ 
+💭 Thinking for 480 characters   
+🔍 Searching for api|routes in /home/user/myproject/node_modules/@tanstack/start-plugin-core ✔ 
+💭 Thinking for 531 characters   
+🔍 Searching for api/products|products in /home/user/myproject/dist/server ✔ 
+💭 Thinking for 698 characters   
+🔍 Searching for api|APIRoute in /home/user/myproject/node_modules/@tanstack/react-start/dist/plugin ✔ 
+💭 Thinking for 324 characters   
+🔍 Searching for **/default-entry/**/* in /home/user/myproject/node_modules/@tanstack/react-start ✔ 
+🔍 Searching for createStartAPIHandler in /home/user/myproject/node_modules ✔ 
+💭 Thinking for 680 characters   
+📂 Listing files in /home/user/myproject/node_modules/@tanstack ✔ 
+💭 Thinking for 307 characters   
+🔍 Searching for createAPIFileRoute in /home/user/myproject/node_modules/@tanstack/react-start/dist/esm ✔ 
+🔍 Searching for createAPIFileRoute in /home/user/myproject/node_modules/@tanstack/react-start-server ✔ 
+🔍 Searching for createAPIFileRoute in /home/user/myproject/node_modules/@tanstack/start-server-core ✔ 
+💭 Thinking for 233 characters   
+🔍 Searching for api in package.json files in /home/user/myproject/node_modules/@tanstack/react-start ✔ 
+📖 Reading /home/user/myproject/node_modules/@tanstack/react-start/package.json ✔ 
+💭 Thinking for 356 characters   
+🔍 Searching for createAPIFileRoute in /home/user/myproject/node_modules/@tanstack/react-router ✔ 
+💭 Thinking for 298 characters   
+🔍 Searching for createAPI in /home/user/myproject/node_modules/@tanstack/react-start/dist/esm/server.js ✔ 
+🔍 Searching for createAPIFileRoute in /home/user/myproject/node_modules/@tanstack/react-start ✔ 
+💭 Thinking for 1858 characters   
+🔍 Searching for createAPIFileRoute in /home/user/myproject/node_modules ✔ 
+💭 Thinking for 305 characters   
+📖 Reading /home/user/myproject/node_modules/@tanstack/react-start/package.json ✔ 
+💭 Thinking for 309 characters   
+🔍 Searching for react-start/api in /home/user/myproject/node_modules/@tanstack/start-plugin-core ✔ 
+💭 Thinking for 296 characters   
+🛠️ Tool webSearch ✔ 
+💭 Thinking for 945 characters   
+💫 Executing rm -rf src/routes/api ✔ 
+💭 Thinking for 270 characters   
+✏️  Writing /home/user/myproject/src/routes/api.products.ts ✖ "File has been modified since it was last read (expected mtime 1781090460250, got missing). Please read the file again before writing."
+💭 Thinking for 250 characters   
+✏️  Writing /home/user/myproject/src/routes/api.products.ts ✖ "File has been modified since it was last read (expected mtime 1781090460250, got missing). Please read the file again before writing."
+💭 Thinking for 290 characters   
+💫 Executing cat << 'EOF' > src/routes/api.products.ts
+import { createFileRoute } from '@tanstack/react-router'
+import { seedProducts, productsSearchSchema } from '../products-schema'
+
+export const Route = createFileRoute('/api/products')({
+  server: {
+    handlers: {
+      GET: async ({ request }) => {
+        const url = new URL(request.url)
+        const searchParams = Object.fromEntries(url.searchParams.entries())
+
+        const result = productsSearchSchema.safeParse(searchParams)
+
+        if (!result.success) {
+          const errorMessage = result.error.errors.map((err) => err.message).join(', ')
+          return Response.json({ error: errorMessage }, { status: 400 })
+        }
+
+        const { q, category, minPrice, maxPrice, sort, order, page, pageSize } = result.data
+
+        let filtered = [...seedProducts]
+
+        // Filtering
+        if (q) {
+          const query = q.toLowerCase()
+          filtered = filtered.filter((p) => p.name.toLowerCase().includes(query))
+        }
+
+        if (category) {
+          filtered = filtered.filter((p) => p.category === category)
+        }
+
+        if (minPrice !== undefined) {
+          filtered = filtered.filter((p) => p.price >= minPrice)
+        }
+
+        if (maxPrice !== undefined) {
+          filtered = filtered.filter((p) => p.price <= maxPrice)
+        }
+
+        const total = filtered.length
+
+        // Sorting
+        filtered.sort((a, b) => {
+          const valA = a[sort]
+          const valB = b[sort]
+
+          let comparison = 0
+          if (typeof valA === 'string' && typeof valB === 'string') {
+            comparison = valA.localeCompare(valB)
+          } else {
+            comparison = (valA as number) - (valB as number)
+          }
+
+          return order === 'asc' ? comparison : -comparison
+        })
+
+        // Pagination
+        const startIndex = (page - 1) * pageSize
+        const endIndex = startIndex + pageSize
+        const rows = filtered.slice(startIndex, endIndex)
+
+        return Response.json({
+          rows,
+          total,
+          page,
+          pageSize,
+        })
+      },
+    },
+  },
+})
+EOF ✔ 
+💫 Executing npm run generate-routes ✔ 
+🔍 Searching for api/products in /home/user/myproject/src/routeTree.gen.ts ✔ 

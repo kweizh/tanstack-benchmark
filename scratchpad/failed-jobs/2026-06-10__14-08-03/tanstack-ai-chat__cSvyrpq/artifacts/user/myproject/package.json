@@ -1,0 +1,32 @@
+{
+  "name": "myproject",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vinxi dev",
+    "build": "vinxi build",
+    "start": "vinxi start"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^0.0.72",
+    "@tanstack/react-router": "^1.81.0",
+    "@tanstack/start": "^1.81.0",
+    "ai": "^3.4.33",
+    "better-sqlite3": "^11.5.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vinxi": "^0.4.3",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@tanstack/router-generator": "^1.167.17",
+    "@tanstack/router-plugin": "^1.81.0",
+    "@types/better-sqlite3": "^7.6.11",
+    "@types/node": "^20.12.7",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.2",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.9"
+  }
+}

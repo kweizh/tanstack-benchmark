@@ -1,0 +1,7 @@
+{
+  "library_name": "TanStack Start",
+  "task_name": "tanstack-start-blog",
+  "complexity_level": "much more complicated task that is not easy for LLM agents to solve",
+  "research_plan_path": "plan.md",
+  "output_dir": "tasks"
+}

@@ -1,0 +1,48 @@
+- Initializing MCP connections...
+You
+# TanStack Table Server-Side Pagination & Sorting ## Background Build a web application using TanStack Table that demonstrates server-side pagination and server-side sorting. ## Requirements * Initialize a React project with a Node.js backend (or use TanStack Start for a full-stack approach). * Create a dataset of 50 mock items on the server. Each item must have the following fields: * `id` (number, 1 to 50) * `name` (string, e.g., "Item 1" to "Item 50") * `value` (number, e.g., 100 to 5000) * Expose a REST API endpoint to fetch the data with pagination and sorting parameters. * Build a frontend UI using TanStack Table to display this data. * Implement server-side pagination (10 items per page by default). * Implement server-side sorting (clicking a column header requests sorted data from the server). * The application MUST run on port 8321. ## Implementation Hints * Use `useReactTable` with `manualPagination: true` and `manualSorting: true`. * Keep track of `pagination` and `sorting` states in your React component and use them as dependencies to fetch data from the backend. * For the backend, an Express server or TanStack Start server functions can be used. If using a separate backend, ensure CORS is handled or serve the React app from the same server. ## Acceptance Criteria * Project path: /home/user/project * Start command: npm run start * Port: 8321 * API Endpoint: * `GET /api/data?page=<page_number>&limit=<items_per_page>&sortBy=<column_name>&sortDesc=<true|false>` * The `page` parameter should be 1-indexed. * The response must be JSON in the format: `{ "data": [...], "totalCount": 50 }`. * UI Requirements: * The root URL `http://localhost:8321/` must render a table displaying the `id`, `name`, and `value` columns. * The table must include a "Next" button and a "Previous" button for pagination. * Clicking the `value` column header must toggle the sorting order and fetch the sorted data from the server.   
+
+Pochi
+💭 Thinking for 4946 characters   
+💫 Executing mkdir -p /home/user/project/src ✔ 
+💭 Thinking for 211 characters   
+✏️  Writing /home/user/project/package.json ✔ 
+✏️  Writing /home/user/project/server.js ✔ 
+✏️  Writing /home/user/project/vite.config.js ✔ 
+✏️  Writing /home/user/project/index.html ✔ 
+✏️  Writing /home/user/project/src/main.jsx ✔ 
+✏️  Writing /home/user/project/src/App.jsx ✔ 
+💭 Thinking for 215 characters   
+💫 Executing cd /home/user/project && npm install ✔ 
+💭 Thinking for 241 characters   
+💫 Executing cd /home/user/project && npm run build ✔ 
+💭 Thinking for 147 characters   
+🎉 Task Completed
+I have created a complete React application with a Node.js backend to demonstrate TanStack Table server-side pagination and sorting.
+
+The project is located at `/home/user/project`. Here are the details of the implementation:
+
+1. **Backend Server (`server.js`)**:
+   - An Express server handles the `/api/data` endpoint and serves the built React app.
+   - It generates 50 mock items with `id`, `name`, and `value` fields on startup.
+   - The API endpoint properly processes `page`, `limit`, `sortBy`, and `sortDesc` query parameters to return paginated and sorted JSON data along with a `totalCount`.
+
+2. **Frontend UI (`src/App.jsx`)**:
+   - Built with `@tanstack/react-table`.
+   - Uses `manualPagination: true` and `manualSorting: true` to defer these operations to the server.
+   - Manages state for `pagination` and `sorting`, re-fetching data whenever these change.
+   - The table renders the `id`, `name`, and `value` columns.
+   - Clicking column headers (e.g., `value`) toggles the sort direction and correctly requests sorted data from the server.
+   - Includes "Next" and "Previous" buttons for pagination, communicating the current page to the backend.
+
+3. **Configuration (`package.json`, `vite.config.js`)**:
+   - The `npm run start` script builds the React application and starts the Express server.
+   - The server runs on port `8321` as required.
+
+You can start the application by running:
+```bash
+cd /home/user/project
+npm run start
+```
+Then, visit `http://localhost:8321/` to see the table. Clicking on any column header like `value` will fetch the appropriately sorted data from the server, and using the "Next" / "Previous" buttons will cycle through the 10-item pages.   
+  

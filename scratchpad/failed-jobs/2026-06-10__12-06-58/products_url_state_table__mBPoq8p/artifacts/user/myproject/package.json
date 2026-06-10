@@ -1,0 +1,40 @@
+{
+  "name": "myproject",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vinxi dev --port 42101",
+    "build": "vinxi build",
+    "start": "vinxi start --port 42101"
+  },
+  "dependencies": {
+    "@tanstack/react-router": "1.120.20",
+    "@tanstack/react-router-devtools": "1.120.20",
+    "@tanstack/react-table": "^8.21.3",
+    "@tanstack/start": "1.120.20",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "vinxi": "0.5.3",
+    "vite-tsconfig-paths": "^5.1.4",
+    "zod": "^3.25.51"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.6",
+    "@types/react-dom": "^19.1.5",
+    "@vitejs/plugin-react": "^4.5.2",
+    "typescript": "^5.8.3"
+  },
+  "overrides": {
+    "@tanstack/router-generator": "1.120.20",
+    "@tanstack/router-plugin": "1.120.20",
+    "@tanstack/react-router": "1.120.20",
+    "@tanstack/react-start-client": "1.120.20",
+    "@tanstack/react-start-server": "1.120.20",
+    "@tanstack/react-router-devtools": "1.120.20",
+    "@tanstack/react-start-plugin": "1.120.17",
+    "@tanstack/start-plugin-core": "1.120.17",
+    "@tanstack/server-functions-plugin": "1.120.17",
+    "@tanstack/start-client-core": "1.120.19",
+    "@tanstack/start-server-core": "1.120.19"
+  }
+}

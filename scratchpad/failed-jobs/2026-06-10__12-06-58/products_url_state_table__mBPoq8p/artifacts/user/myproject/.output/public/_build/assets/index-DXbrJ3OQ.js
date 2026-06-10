@@ -1,0 +1,1 @@
+import{j as e,L as o}from"./client-BPbXyjIc.js";const r=()=>e.jsxs("div",{style:{textAlign:"center",paddingTop:"4rem"},children:[e.jsx("h1",{children:"Welcome"}),e.jsx("p",{style:{marginTop:"1rem",color:"#555"},children:e.jsx(o,{to:"/products",style:{color:"#1a1a2e",fontWeight:600},children:"→ Browse Products"})})]});export{r as component};

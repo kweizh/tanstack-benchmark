@@ -1,0 +1,69 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-06-10T16:15:16.898957+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 4,
+            "passed": 0,
+            "failed": 4,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1781108116286,
+            "stop": 1781108116898
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_api_initial_state",
+                "status": "failed",
+                "duration": 279,
+                "start": 1781108116603,
+                "stop": 1781108116882,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "xprocess = <xprocess.xprocess.XProcess object at 0x7f1d7e0cedb0>\n\n    @pytest.fixture(scope=\"session\")\n    def start_app(xprocess):\n        # Run build first\n        build_result = subprocess.run(\n            [\"npm\", \"run\", \"build\"],\n            cwd=PROJECT_DIR,\n            capture_output=True,\n            text=True\n        )\n>       assert build_result.returncode == 0, f\"npm run build failed: {build_result.stderr}\\n{build_result.stdout}\"\nE       AssertionError: npm run build failed: npm error code ENOENT\nE         npm error syscall open\nE         npm error path /home/user/project/package.json\nE         npm error errno -2\nE         npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/home/user/project/package.json'\nE         npm error enoent This is related to npm not being able to find a file.\nE         npm error enoent\nE         npm error A complete log of this run can be found in: /root/.npm/_logs/2026-06-10T16_15_16_710Z-debug-0.log\nE         \nE         \nE       assert 254 == 0\nE        +  where 254 = CompletedProcess(args=['npm', 'run', 'build'], returncode=254, stdout='', stderr=\"npm error code ENOENT\\nnpm error sys...enoent\\nnpm error A complete log of this run can be found in: /root/.npm/_logs/2026-06-10T16_15_16_710Z-debug-0.log\\n\").returncode\n\ntests/test_final_state.py:26: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_api_successful_like",
+                "status": "failed",
+                "duration": 5,
+                "start": 1781108116883,
+                "stop": 1781108116888,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "xprocess = <xprocess.xprocess.XProcess object at 0x7f1d7e0cedb0>\n\n    @pytest.fixture(scope=\"session\")\n    def start_app(xprocess):\n        # Run build first\n        build_result = subprocess.run(\n            [\"npm\", \"run\", \"build\"],\n            cwd=PROJECT_DIR,\n            capture_output=True,\n            text=True\n        )\n>       assert build_result.returncode == 0, f\"npm run build failed: {build_result.stderr}\\n{build_result.stdout}\"\nE       AssertionError: npm run build failed: npm error code ENOENT\nE         npm error syscall open\nE         npm error path /home/user/project/package.json\nE         npm error errno -2\nE         npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/home/user/project/package.json'\nE         npm error enoent This is related to npm not being able to find a file.\nE         npm error enoent\nE         npm error A complete log of this run can be found in: /root/.npm/_logs/2026-06-10T16_15_16_710Z-debug-0.log\nE         \nE         \nE       assert 254 == 0\nE        +  where 254 = CompletedProcess(args=['npm', 'run', 'build'], returncode=254, stdout='', stderr=\"npm error code ENOENT\\nnpm error sys...enoent\\nnpm error A complete log of this run can be found in: /root/.npm/_logs/2026-06-10T16_15_16_710Z-debug-0.log\\n\").returncode\n\ntests/test_final_state.py:26: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_api_failed_like",
+                "status": "failed",
+                "duration": 5,
+                "start": 1781108116888,
+                "stop": 1781108116893,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "xprocess = <xprocess.xprocess.XProcess object at 0x7f1d7e0cedb0>\n\n    @pytest.fixture(scope=\"session\")\n    def start_app(xprocess):\n        # Run build first\n        build_result = subprocess.run(\n            [\"npm\", \"run\", \"build\"],\n            cwd=PROJECT_DIR,\n            capture_output=True,\n            text=True\n        )\n>       assert build_result.returncode == 0, f\"npm run build failed: {build_result.stderr}\\n{build_result.stdout}\"\nE       AssertionError: npm run build failed: npm error code ENOENT\nE         npm error syscall open\nE         npm error path /home/user/project/package.json\nE         npm error errno -2\nE         npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/home/user/project/package.json'\nE         npm error enoent This is related to npm not being able to find a file.\nE         npm error enoent\nE         npm error A complete log of this run can be found in: /root/.npm/_logs/2026-06-10T16_15_16_710Z-debug-0.log\nE         \nE         \nE       assert 254 == 0\nE        +  where 254 = CompletedProcess(args=['npm', 'run', 'build'], returncode=254, stdout='', stderr=\"npm error code ENOENT\\nnpm error sys...enoent\\nnpm error A complete log of this run can be found in: /root/.npm/_logs/2026-06-10T16_15_16_710Z-debug-0.log\\n\").returncode\n\ntests/test_final_state.py:26: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_optimistic_ui",
+                "status": "failed",
+                "duration": 5,
+                "start": 1781108116893,
+                "stop": 1781108116898,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "xprocess = <xprocess.xprocess.XProcess object at 0x7f1d7e0cedb0>\n\n    @pytest.fixture(scope=\"session\")\n    def start_app(xprocess):\n        # Run build first\n        build_result = subprocess.run(\n            [\"npm\", \"run\", \"build\"],\n            cwd=PROJECT_DIR,\n            capture_output=True,\n            text=True\n        )\n>       assert build_result.returncode == 0, f\"npm run build failed: {build_result.stderr}\\n{build_result.stdout}\"\nE       AssertionError: npm run build failed: npm error code ENOENT\nE         npm error syscall open\nE         npm error path /home/user/project/package.json\nE         npm error errno -2\nE         npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/home/user/project/package.json'\nE         npm error enoent This is related to npm not being able to find a file.\nE         npm error enoent\nE         npm error A complete log of this run can be found in: /root/.npm/_logs/2026-06-10T16_15_16_710Z-debug-0.log\nE         \nE         \nE       assert 254 == 0\nE        +  where 254 = CompletedProcess(args=['npm', 'run', 'build'], returncode=254, stdout='', stderr=\"npm error code ENOENT\\nnpm error sys...enoent\\nnpm error A complete log of this run can be found in: /root/.npm/_logs/2026-06-10T16_15_16_710Z-debug-0.log\\n\").returncode\n\ntests/test_final_state.py:26: AssertionError"
+            }
+        ]
+    }
+}

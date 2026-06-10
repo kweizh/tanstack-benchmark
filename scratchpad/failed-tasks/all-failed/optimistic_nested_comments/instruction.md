@@ -1,0 +1,68 @@
+# Optimistic Updates for a Nested Comment Thread (TanStack Start + TanStack Query)
+
+## Background
+Build a small full-stack TanStack Start application that renders a nested comment thread (parent → children → grandchildren, arbitrary depth) and supports posting new comments with an **optimistic update** pattern powered by TanStack Query. New comments must appear in the UI BEFORE the server confirms, and must roll back if the server returns an error.
+
+The server side of the app must be a real HTTP server (the one TanStack Start spins up is fine). In-memory persistence on the server is acceptable — no database is required — but the data must survive between HTTP requests for the lifetime of the running server process.
+
+## Requirements
+- Implement the project under `/home/user/myproject`.
+- The app MUST listen on TCP port **47821** when started.
+- Implement the following REST endpoints (the HTTP server that TanStack Start exposes is fine; you can use API routes, route handlers, or a server-side router of your choice):
+  - `GET /api/comments` — returns the full comment tree as a flat JSON array.
+  - `POST /api/comments` — creates a new comment.
+  - `POST /api/comments?fail=1` — forces a server error, used to exercise the rollback path.
+- The browser-rendered HTML at `GET /` must include the textual `body` of every persisted comment so that the rendered tree is observable in the page HTML (either via SSR or after client-side hydration).
+- Implement the client side using TanStack Query:
+  - Use `useMutation` with `onMutate` to insert the new comment into the cached tree optimistically.
+  - On error (e.g. when the server returns 500), `onError` MUST roll back the cache to its pre-mutation snapshot.
+  - On settle, invalidate the comments query so the UI re-syncs with the server.
+- Render the comment tree using a recursive component so that any depth of nesting is supported.
+
+## Data Model
+A comment is a JSON object:
+```json
+{
+  "id": "string",
+  "parentId": "string | null",
+  "body": "string",
+  "createdAt": 1234567890
+}
+```
+- `id` is assigned by the server (any unique string is fine, e.g. a UUID or incrementing id).
+- `parentId` is `null` for top-level comments, otherwise the `id` of the parent.
+- `createdAt` is a Unix epoch in milliseconds, assigned by the server.
+
+## REST Contract
+- `GET /api/comments` → `200 OK`, JSON body: an array of comment objects (may be empty initially). Order is not significant; parent/child relationships are expressed solely through `parentId`.
+- `POST /api/comments`
+  - Request body (JSON): `{ "parentId": string | null, "body": string }`.
+  - The server MUST artificially delay the response by **at least 300 ms** so that the optimistic update is observable in the UI.
+  - On success: `200 OK`, JSON body is the newly created comment object including the server-assigned `id` and `createdAt`.
+- `POST /api/comments?fail=1`
+  - Same request shape, but the server MUST return HTTP `500` and MUST NOT persist the comment.
+  - This is used to drive the client-side rollback path; the test only asserts the HTTP behavior and that persistence is unchanged.
+
+## Implementation Hints
+- Initialize the project with the TanStack CLI (e.g. `npx @tanstack/cli@latest create`) or a TanStack Start template; the exact scaffold is up to you.
+- Configure the dev/start command so the server listens on **port 47821**. Most TanStack Start scaffolds accept a `PORT` env var or a `vite`/`vinxi` config option.
+- Pick a query key for the comments tree and keep it stable.
+- Within `useMutation`:
+  - In `onMutate`, cancel in-flight queries with `queryClient.cancelQueries`, snapshot the current cache with `getQueryData`, and apply the optimistic insert with `setQueryData`. Return the snapshot from `onMutate` for use in `onError`.
+  - In `onError`, restore the snapshot with `setQueryData`.
+  - In `onSettled`, call `queryClient.invalidateQueries` so the cache re-syncs with the server.
+- For SSR/hydration consistency, prefetch the comments query on the server so the initial HTML already contains the rendered comment bodies.
+- For the rendering, write a recursive React component that takes a `parentId` and renders all children whose `parentId` matches, then recurses for each child.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: `npm run start` from `/home/user/myproject` (you may use `npm run build && npm run start` if your scaffold needs a build step; configure `npm run start` so it serves the production app on port 47821).
+- Port: 47821
+- API Endpoints:
+  - `GET /api/comments` returns status 200 and a JSON array of comment objects, possibly empty.
+  - `POST /api/comments` with a valid JSON body returns status 200 and the created comment, including a server-assigned `id` and `createdAt`.
+  - `POST /api/comments?fail=1` returns status 500 and does NOT persist the comment.
+- HTML at `GET /` includes the `body` text of every persisted comment after hydration so the rendered tree is observable as a substring of the HTML.
+- Nested replies are supported: a comment created with `parentId` referencing another comment MUST appear in `GET /api/comments` with that exact `parentId`.
+- The client uses TanStack Query's optimistic-update pattern (`onMutate`/`onError`/`onSettled`); failing mutations roll back the cache.
+

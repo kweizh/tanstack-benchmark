@@ -1,0 +1,137 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-06-10T11:27:10.585357+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 9,
+            "passed": 0,
+            "failed": 9,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1781090768925,
+            "stop": 1781090830583
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_default_listing_pagination",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 60773,
+                "start": 1781090769474,
+                "stop": 1781090830247,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_default_listing_pagination(start_app):\n        r = requests.get(f\"{BASE_URL}/api/products\", timeout=15)\n>       assert r.status_code == 200, (\n            f\"GET /api/products should return 200, got {r.status_code}: {r.text[:300]}\"\n        )\nE       AssertionError: GET /api/products should return 200, got 501: <!DOCTYPE html><html><head><title>Server Error</title></head><body><h1>Server Error</h1><p>Something went wrong while processing your request.</p>\nE       assert 501 == 200\nE        +  where 501 = <Response [501]>.status_code\n\ntests/test_final_state.py:75: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_category_filter_books_only",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 38,
+                "start": 1781090830248,
+                "stop": 1781090830286,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_category_filter_books_only(start_app):\n        r = requests.get(\n            f\"{BASE_URL}/api/products\",\n            params={\"category\": \"books\", \"pageSize\": \"20\"},\n            timeout=15,\n        )\n>       assert r.status_code == 200, (\n            f\"GET /api/products?category=books should return 200, got {r.status_code}: {r.text[:300]}\"\n        )\nE       AssertionError: GET /api/products?category=books should return 200, got 501: <!DOCTYPE html><html><head><title>Server Error</title></head><body><h1>Server Error</h1><p>Something went wrong while processing your request.</p>\nE       assert 501 == 200\nE        +  where 501 = <Response [501]>.status_code\n\ntests/test_final_state.py:94: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_price_range_filter",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 45,
+                "start": 1781090830287,
+                "stop": 1781090830332,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_price_range_filter(start_app):\n        r = requests.get(\n            f\"{BASE_URL}/api/products\",\n            params={\"minPrice\": \"50\", \"maxPrice\": \"100\", \"pageSize\": \"20\"},\n            timeout=15,\n        )\n>       assert r.status_code == 200, (\n            f\"GET /api/products?minPrice=50&maxPrice=100 should return 200, \"\n            f\"got {r.status_code}: {r.text[:300]}\"\n        )\nE       AssertionError: GET /api/products?minPrice=50&maxPrice=100 should return 200, got 501: <!DOCTYPE html><html><head><title>Server Error</title></head><body><h1>Server Error</h1><p>Something went wrong while processing your request.</p>\nE       assert 501 == 200\nE        +  where 501 = <Response [501]>.status_code\n\ntests/test_final_state.py:115: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_sort_by_price_ascending",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 44,
+                "start": 1781090830334,
+                "stop": 1781090830378,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_sort_by_price_ascending(start_app):\n        r = requests.get(\n            f\"{BASE_URL}/api/products\",\n            params={\"sort\": \"price\", \"order\": \"asc\", \"pageSize\": \"12\"},\n            timeout=15,\n        )\n>       assert r.status_code == 200, (\n            f\"GET sorted by price asc should return 200, got {r.status_code}: {r.text[:300]}\"\n        )\nE       AssertionError: GET sorted by price asc should return 200, got 501: <!DOCTYPE html><html><head><title>Server Error</title></head><body><h1>Server Error</h1><p>Something went wrong while processing your request.</p>\nE       assert 501 == 200\nE        +  where 501 = <Response [501]>.status_code\n\ntests/test_final_state.py:139: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_search_substring_case_insensitive_keyboard",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 36,
+                "start": 1781090830379,
+                "stop": 1781090830415,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_search_substring_case_insensitive_keyboard(start_app):\n        r = requests.get(\n            f\"{BASE_URL}/api/products\",\n            params={\"q\": \"keyboard\", \"pageSize\": \"20\"},\n            timeout=15,\n        )\n>       assert r.status_code == 200, (\n            f\"GET ?q=keyboard should return 200, got {r.status_code}: {r.text[:300]}\"\n        )\nE       AssertionError: GET ?q=keyboard should return 200, got 501: <!DOCTYPE html><html><head><title>Server Error</title></head><body><h1>Server Error</h1><p>Something went wrong while processing your request.</p>\nE       assert 501 == 200\nE        +  where 501 = <Response [501]>.status_code\n\ntests/test_final_state.py:158: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_search_substring_case_insensitive_program",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 41,
+                "start": 1781090830415,
+                "stop": 1781090830456,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_search_substring_case_insensitive_program(start_app):\n        r = requests.get(\n            f\"{BASE_URL}/api/products\",\n            params={\"q\": \"PROGRAM\", \"pageSize\": \"20\"},\n            timeout=15,\n        )\n>       assert r.status_code == 200, (\n            f\"GET ?q=PROGRAM should return 200, got {r.status_code}: {r.text[:300]}\"\n        )\nE       AssertionError: GET ?q=PROGRAM should return 200, got 501: <!DOCTYPE html><html><head><title>Server Error</title></head><body><h1>Server Error</h1><p>Something went wrong while processing your request.</p>\nE       assert 501 == 200\nE        +  where 501 = <Response [501]>.status_code\n\ntests/test_final_state.py:180: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_pagination_second_page_default_sort",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 33,
+                "start": 1781090830458,
+                "stop": 1781090830491,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_pagination_second_page_default_sort(start_app):\n        r = requests.get(\n            f\"{BASE_URL}/api/products\",\n            params={\"page\": \"2\", \"pageSize\": \"5\"},\n            timeout=15,\n        )\n>       assert r.status_code == 200, (\n            f\"GET ?page=2&pageSize=5 should return 200, got {r.status_code}: {r.text[:300]}\"\n        )\nE       AssertionError: GET ?page=2&pageSize=5 should return 200, got 501: <!DOCTYPE html><html><head><title>Server Error</title></head><body><h1>Server Error</h1><p>Something went wrong while processing your request.</p>\nE       assert 501 == 200\nE        +  where 501 = <Response [501]>.status_code\n\ntests/test_final_state.py:202: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_invalid_category_returns_400",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 47,
+                "start": 1781090830493,
+                "stop": 1781090830540,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_invalid_category_returns_400(start_app):\n        r = requests.get(\n            f\"{BASE_URL}/api/products\",\n            params={\"category\": \"invalid\"},\n            timeout=15,\n        )\n>       assert r.status_code == 400, (\n            f\"GET ?category=invalid must return HTTP 400, got {r.status_code}: {r.text[:300]}\"\n        )\nE       AssertionError: GET ?category=invalid must return HTTP 400, got 501: <!DOCTYPE html><html><head><title>Server Error</title></head><body><h1>Server Error</h1><p>Something went wrong while processing your request.</p>\nE       assert 501 == 400\nE        +  where 501 = <Response [501]>.status_code\n\ntests/test_final_state.py:221: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_html_route_filters_books",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 40,
+                "start": 1781090830542,
+                "stop": 1781090830582,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_html_route_filters_books(start_app):\n        r = requests.get(\n            f\"{BASE_URL}/products\",\n            params={\"category\": \"books\"},\n            timeout=20,\n        )\n>       assert r.status_code == 200, (\n            f\"GET /products?category=books should return 200, got {r.status_code}: {r.text[:300]}\"\n        )\nE       AssertionError: GET /products?category=books should return 200, got 501: <!DOCTYPE html><html><head><title>Server Error</title></head><body><h1>Server Error</h1><p>Something went wrong while processing your request.</p>\nE       assert 501 == 200\nE        +  where 501 = <Response [501]>.status_code\n\ntests/test_final_state.py:238: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

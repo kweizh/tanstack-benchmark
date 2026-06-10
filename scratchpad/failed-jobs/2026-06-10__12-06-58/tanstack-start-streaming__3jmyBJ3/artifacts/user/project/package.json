@@ -1,0 +1,30 @@
+{
+  "name": "tanstack-start-streaming-dashboard",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vinxi dev --port 7384",
+    "build": "vinxi build",
+    "start": "vinxi start"
+  },
+  "dependencies": {
+    "@tanstack/react-router": "1.120.20",
+    "@tanstack/start": "1.120.20",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "vinxi": "0.5.3"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "typescript": "^5.8.3",
+    "vite-tsconfig-paths": "^5.1.4"
+  },
+  "overrides": {
+    "@tanstack/router-generator": "1.120.20",
+    "@tanstack/router-plugin": "1.120.20",
+    "@tanstack/react-start-plugin": "1.120.17",
+    "@tanstack/server-functions-plugin": "1.120.17",
+    "@tanstack/start-plugin-core": "1.120.20"
+  }
+}

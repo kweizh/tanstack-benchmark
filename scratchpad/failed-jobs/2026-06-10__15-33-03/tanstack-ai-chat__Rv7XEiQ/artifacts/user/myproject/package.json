@@ -1,0 +1,29 @@
+{
+  "name": "myproject",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tanstack-start dev",
+    "build": "tanstack-start build",
+    "start": "tanstack-start start"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^1.3.24",
+    "@tanstack/react-start": "^1.168.25",
+    "@tanstack/react-router": "^1.170.15",
+    "@tanstack/start": "^1.120.20",
+    "ai": "^4.3.19",
+    "better-sqlite3": "^11.9.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "vinxi": "^0.5.11",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.7.0",
+    "vite": "^7.0.0"
+  }
+}
