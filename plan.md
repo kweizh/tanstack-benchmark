@@ -103,6 +103,7 @@ const updateCount = createServerFn({ method: 'POST' })
 2.  **SSR Hydration with Query**: Misconfiguring `staleTime` or `gcTime` during SSR can lead to "Hydration Mismatch" errors where the server and client data differ.
 3.  **Table Column Typing**: Defining complex columns with custom cell renderers and meta-data requires deep understanding of TypeScript generics, often leading to "Type instantiation is excessively deep" errors.
 4.  **Headless Complexity**: The "Headless" nature means no default UI. Implementing a basic accessible table or form requires significant boilerplate (e.g., mapping over header groups).
+5.  **Port Usage**: Since we need to run the created server and check the server aliveness by port, MUST pick a random port in task description and check it in the initial test and use it in the final test.
 
 ---
 
