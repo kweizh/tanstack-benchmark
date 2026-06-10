@@ -1,5 +1,450 @@
 1:"$Sreact.fragment"
-2:I[75049,["/tanstack-benchmark/_next/static/chunks/d2c13bb33c4fcd54.js","/tanstack-benchmark/_next/static/chunks/c21188132e0e0d48.js"],"OutletBoundary"]
-3:"$Sreact.suspense"
-0:{"buildId":"x12TpFBCpluIv9gZ4ngoL","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"min-h-screen bg-background text-foreground font-sans selection:bg-primary/20","children":[["$","div",null,{"className":"fixed inset-0 -z-10 h-full w-full bg-background bg-[radial-gradient(#2a2a2a_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20 dark:opacity-40"}],["$","div",null,{"className":"container mx-auto px-4 sm:px-8 lg:px-12 py-8 max-w-screen-2xl h-[100dvh] flex flex-col overflow-hidden","children":[["$","div",null,{"className":"mb-6 space-y-4 shrink-0","children":[["$","div",null,{"className":"flex items-center gap-4","children":["$","a",null,{"href":"/","className":"text-sm text-muted-foreground hover:text-foreground transition-colors","children":"← Back to Leaderboard"}]}],["$","div",null,{"children":["$","h1",null,{"className":"text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/50","children":"Task"}]}]]}],["$","div",null,{"className":"relative overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/10 via-card/90 to-background/90 px-5 pb-10 pt-6 text-center shadow-[0_0_0_1px_hsl(var(--primary)/0.18),0_28px_72px_-32px_hsl(var(--foreground)/0.45)] backdrop-blur-sm sm:px-8 sm:pb-14 sm:pt-8","children":[["$","div",null,{"className":"pointer-events-none absolute -right-16 -top-16 h-36 w-36 rounded-full bg-primary/20 blur-3xl sm:-right-14 sm:-top-14 sm:h-40 sm:w-40"}],["$","div",null,{"className":"pointer-events-none absolute -left-20 bottom-0 h-32 w-32 rounded-full bg-foreground/10 blur-3xl sm:h-36 sm:w-36"}],["$","div",null,{"className":"relative mx-auto mb-8 inline-flex items-center rounded-full border border-primary/40 bg-primary/15 px-3 py-1 text-xs font-semibold tracking-[0.12em] text-foreground sm:text-sm sm:tracking-[0.16em]","children":"⏳ PIPELINE PENDING REVIEW"}],["$","p",null,{"className":"relative mx-auto max-w-2xl px-4 text-center text-lg font-semibold tracking-wide text-foreground sm:px-5 sm:text-xl","children":[0," sample cases generated — pending review"]}],["$","p",null,{"className":"relative mx-auto mt-2 max-w-2xl px-4 text-left text-sm leading-relaxed text-muted-foreground sm:px-5","children":"Your sample cases are ready. Before moving forward, we do a quick review together to make sure everything looks right and aligns with real-world usage."}],["$","div",null,{"className":"relative mx-auto mt-8 max-w-2xl rounded-xl bg-primary/10 px-4 py-4 text-left sm:px-5","children":[["$","p",null,{"className":"text-base font-semibold text-foreground sm:text-lg text-center","children":"Next step: join Slack for review"}],["$","p",null,{"className":"mt-1 text-sm leading-relaxed text-muted-foreground","children":"We've sent you a Slack invitation to your registered email with Zealt. Please join and we'll walk through the next step together."}],["$","p",null,{"className":"mt-3 text-xs text-muted-foreground","children":["If you don't see it, just reach out at"," ",["$","a",null,{"href":"mailto:zealtdev@tabbyml.com","className":"font-normal text-foreground underline decoration-primary/60 underline-offset-4 hover:text-primary transition-colors","children":"zealtdev@tabbyml.com"}],"."]}]]}]]}]]}]]}],[["$","script","script-0",{"src":"/tanstack-benchmark/_next/static/chunks/31dcb01f687dbe0f.js","async":true}],["$","script","script-1",{"src":"/tanstack-benchmark/_next/static/chunks/f9f579c42c486944.js","async":true}]],["$","$L2",null,{"children":["$","$3",null,{"name":"Next.MetadataOutlet","children":"$@4"}]}]]}],"loading":null,"isPartial":false}
-4:null
+2:"$Sreact.suspense"
+3:I[42654,["/tanstack-benchmark/_next/static/chunks/babff0e7418ab052.js","/tanstack-benchmark/_next/static/chunks/3ecbb78a8ff87549.js","/tanstack-benchmark/_next/static/chunks/31dcb01f687dbe0f.js","/tanstack-benchmark/_next/static/chunks/f9f579c42c486944.js"],"TasksPageClient"]
+15:I[75049,["/tanstack-benchmark/_next/static/chunks/d2c13bb33c4fcd54.js","/tanstack-benchmark/_next/static/chunks/c21188132e0e0d48.js"],"OutletBoundary"]
+4:T103d,# Full-Stack Counter with TanStack Start and SQLite
+
+## Background
+Build a full-stack counter application using **TanStack Start** (the React full-stack framework from the TanStack ecosystem). The counter value must be persisted in a **SQLite** database, mutated through **TanStack Start Server Functions**, and rendered server-side via TanStack Router file-based routing so that the initial HTML response already contains the current value. The same backend must also expose a small JSON REST surface so that other clients can read and update the counter without going through the React UI.
+
+## Requirements
+- Scaffold a TanStack Start project (file-based routing, `@tanstack/react-start`, TanStack Router, SSR enabled).
+- Persist the counter in a SQLite database on disk; the file must survive a server restart.
+- Implement increment behavior with a **TanStack Start Server Function** (`createServerFn`) so the same business logic is reused by the React UI and the REST endpoints.
+- The root page `/` must render the current counter value as part of the server-rendered HTML response (no client-only fetch).
+- Expose a stable REST JSON surface for programmatic access (see Acceptance Criteria).
+- The application must run as an HTTP server bound to the port given below.
+
+## Implementation Hints
+- Use the official TanStack CLI to bootstrap the project (for example `npx @tanstack/cli@latest create` or `npx create-tsrouter-app@latest`), then add the SQLite driver of your choice (`better-sqlite3` is a common pick for Node).
+- Initialize the database (create the table and seed the counter row if missing) on server boot, before the HTTP listener accepts connections, so the very first request already has a value to read.
+- Pick a single source of truth for the increment logic: a `createServerFn({ method: 'POST' })` handler that opens the SQLite connection, performs an atomic `UPDATE`, and returns the new value. The route loader and the REST endpoints should both delegate to this same server function (or its underlying helper).
+- For the REST surface, you can either add server routes (e.g. files under `src/routes/api/...` that export a `Route` with `server.handlers`) or any other mechanism supported by TanStack Start — what matters is the exact HTTP contract documented under Acceptance Criteria.
+- Bind the listener to **port 47329** on `0.0.0.0`. The TanStack Start dev/start server honors the `PORT` environment variable; configure your `start`/`dev` scripts (or `vite.config.ts`) so that the chosen port is used even when `PORT` is not set, but accept `PORT` if provided.
+- Do not bundle any state in memory only — every request must read from SQLite so the value survives a process restart.
+
+## Acceptance Criteria
+- Project path: `/home/user/myproject`
+- Start command: `npm run start` (after `npm run build`). Running `npm run dev` is also acceptable as long as the same port is used and the SQLite file is the same.
+- Port: `47329` (the server must listen on `0.0.0.0:47329`).
+- SSR page:
+  - `GET /` returns HTTP `200` with `Content-Type` containing `text/html`. The response body must contain the current counter value as a decimal integer rendered server-side (i.e. the number appears in the HTML returned by the very first request, not only after client-side JavaScript runs).
+- REST API (JSON):
+  - `GET /api/counter` returns HTTP `200`, `Content-Type` containing `application/json`, body shape:
+    ```json
+    { "count": <integer> }
+    ```
+  - `POST /api/counter/increment` returns HTTP `200`, `Content-Type` containing `application/json`, body shape:
+    ```json
+    { "count": <integer> }
+    ```
+    The returned `count` must equal the previous `count` plus `1`.
+- Persistence: After the server is stopped and restarted, `GET /api/counter` must return the last value that was stored before shutdown (not `0`).
+- The increment endpoint MUST be backed by a TanStack Start Server Function created with `createServerFn` (the agent is free to expose it through any route shape, as long as the REST contract above holds).
+- A SQLite database file must exist on disk inside the project after the server has run at least once.
+
+5:T703,# E-commerce Shopping Cart with TanStack
+
+## Background
+Create an e-commerce shopping cart application using TanStack Query for data fetching and TanStack Router for URL-based state management.
+
+## Requirements
+- Create a React web application using TanStack Query and TanStack Router (you may use Vite or TanStack Start).
+- Display a list of products fetched using TanStack Query (you can use mock data or a mock API function).
+- Implement a shopping cart where the cart state (items and their quantities) is stored entirely in the URL search parameters using TanStack Router.
+- Users must be able to add products to the cart, remove them, and adjust quantities, with all changes reflecting in the URL.
+- The application must run on port 8432.
+
+## Implementation Hints
+- Configure your dev server (e.g., Vite) to run on port `8432`.
+- Use `useQuery` from `@tanstack/react-query` to fetch the product list.
+- Define a route using `@tanstack/react-router` and use its search param API (e.g., `validateSearch`) to parse and serialize the cart state in the URL.
+- Use the router's navigation API (`useNavigate` or `Link`) to update the cart state in the URL when a user interacts with the cart.
+
+## Acceptance Criteria
+- Project path: /home/user/ecommerce-cart
+- Start command: npm run dev
+- Port: 8432
+- Routes and Features:
+  - GET `/`: Displays a list of products. Each product has an "Add to Cart" button.
+  - The cart state must be managed via URL search parameters (e.g., `/?cart=...` or `/?items=...`).
+  - Clicking "Add to Cart" updates the URL search parameters to include the item without losing other URL state.
+  - The page displays the current cart contents and total based on the URL state.
+  - Refreshing the page with the cart URL parameters must restore the cart state correctly.
+
+6:T58e,# Basic Login Form with TanStack Form and Zod
+
+## Background
+Create a basic login form in React using TanStack Form for state management and Zod for validation.
+
+## Requirements
+- Create a login form with `email` and `password` fields.
+- Use TanStack Form to manage the form state.
+- Use Zod to validate the fields: `email` must be a valid email address, and `password` must be at least 8 characters long.
+- Display validation errors below the respective fields.
+- On successful submission, display a success message (e.g., "Login successful").
+- The application must run on port 8432.
+
+## Implementation Hints
+- Set up a React project (e.g., using Vite).
+- Install `@tanstack/react-form` and `zod`.
+- Use the `useForm` hook and pass Zod schemas to the `validators.onChange` property for each field to trigger validation as the user types.
+- Use the `Field` component to render inputs and display `field.state.meta.errors` if they exist.
+- Configure your development server to run on port 8432.
+
+## Acceptance Criteria
+- Project path: /home/user/project
+- Start command: npm run dev
+- Port: 8432
+- The form must contain an input for email, an input for password, and a submit button.
+- Submitting with an empty or invalid email must display a validation error.
+- Submitting with a password shorter than 8 characters must display a validation error.
+- Submitting with valid data must display a "Login successful" message.
+
+7:T645,# Multi-step Registration Form
+
+## Background
+You have a React project at `/home/user/tanstack-form-wizard`. Create a multi-step registration form using React, TanStack Form, and Zod validation.
+
+## Requirements
+- Build a 2-step registration form.
+- **Step 1 (User Info)**: Fields for `firstName` (min 2 chars) and `lastName` (min 2 chars).
+- **Step 2 (Account Info)**: Fields for `email` (valid email) and `password` (min 6 chars).
+- Use TanStack Form for state management and `@tanstack/zod-form-adapter` for validation.
+- Validation must trigger as the user types (onChange).
+- Provide a "Next" button to go to Step 2, a "Back" button to return to Step 1, and a "Submit" button on Step 2.
+- On successful submit, render a success message with the submitted data.
+
+## Implementation Hints
+- Maintain the current step in the component state.
+- Use `form.trigger()` or validate the fields before proceeding to the next step.
+- Use Vite for the React app.
+
+## Acceptance Criteria
+- Project path: `/home/user/tanstack-form-wizard`
+- Start command: `npm run dev -- --port 7345` (or ensure your app listens on port 7345)
+- Port: 7345
+- UI Requirements:
+  - Initial load shows Step 1 with `firstName` and `lastName` inputs, and a "Next" button.
+  - Clicking "Next" without filling fields displays validation errors.
+  - Filling valid data in Step 1 and clicking "Next" shows Step 2 with `email` and `password` inputs, a "Back" button, and a "Submit" button.
+  - Filling valid data in Step 2 and clicking "Submit" shows a success message element with `id="success-message"` containing the submitted JSON data.
+
+8:T57f,# TanStack Query Infinite Scrolling Feed
+
+## Background
+Implement an infinite scrolling feed using TanStack Query to demonstrate pagination and server state management.
+
+## Requirements
+- Initialize a React project with TanStack Query (e.g., Vite + React or TanStack Start) in `/home/user/myproject`.
+- Implement a feed that fetches data in pages using `useInfiniteQuery`.
+- Create a mock API or server function to serve the feed data. Each page should return a list of items and a `nextCursor`.
+- Render the items in a list.
+- Add a "Load More" button to fetch the next page.
+- Configure the development server to run on port `5123`.
+
+## Implementation Hints
+- If using Vite, configure `vite.config.ts` (or equivalent) to use `port: 5123`.
+- Use `useInfiniteQuery` from `@tanstack/react-query` to manage the feed state.
+- Ensure the mock API can return at least two distinct pages of data to allow pagination testing.
+
+## Acceptance Criteria
+- Project path: `/home/user/myproject`
+- Start command: `npm run dev`
+- Port: `5123`
+- Required test criteria that will be evaluated:
+  1. The verifier will navigate to `http://localhost:5123/`.
+  2. The verifier will check that the initial list of items (Page 1) is rendered.
+  3. The verifier will find and click a button with the exact text "Load More".
+  4. The verifier will check that the next set of items (Page 2) is appended to the DOM alongside Page 1.
+
+9:T739,# Fetch and Display Products with TanStack Query
+
+## Background
+TanStack Query (formerly React Query) is a powerful asynchronous state management library. In this task, you will create a simple React application that uses TanStack Query to fetch and display a list of products.
+
+## Requirements
+- Initialize a React project (e.g., using Vite with React and TypeScript) in the `/home/user/tanstack-query-products` directory.
+- Install `@tanstack/react-query`.
+- Configure the `QueryClient` and wrap your application with `QueryClientProvider`.
+- Create a mock fetch function that returns a promise resolving to the following list of products after a short delay (e.g., 500ms):
+  ```json
+  [
+    { "id": 1, "name": "Laptop", "price": 999 },
+    { "id": 2, "name": "Phone", "price": 599 }
+  ]
+  ```
+- Use the `useQuery` hook to fetch these products.
+- While the data is loading, display a "Loading..." message.
+- Once the data is loaded, render the products in an unordered list (`<ul>`). Each list item (`<li>`) should display the product name and price (e.g., "Laptop - $999").
+- Configure the development server to run on port 4782.
+
+## Implementation Hints
+- You can use Vite to quickly scaffold the React project (`npm create vite@latest . -- --template react-ts`).
+- Remember to configure Vite's server options in `vite.config.ts` to use the required port (4782).
+- Set up the `QueryClientProvider` at the root of your component tree (e.g., in `main.tsx` or `App.tsx`).
+- Use `useQuery` with a `queryKey` and a `queryFn` that calls your mock fetch function.
+
+## Acceptance Criteria
+- Project path: /home/user/tanstack-query-products
+- Start command: npm run dev
+- Port: 4782
+- The app must serve a web page that initially shows "Loading..." and then displays the product list.
+- The product list must contain "Laptop - $999" and "Phone - $599".
+
+a:T891,# TanStack Query Todo List
+
+## Background
+Create a basic Todo list application that fetches and creates items using TanStack Query. You will need to implement both a simple backend API and a React frontend.
+
+## Requirements
+- Implement a backend API (e.g., using Express) with endpoints to get and create todos.
+- Implement a React frontend that uses TanStack Query (`useQuery` and `useMutation`) to interact with the API.
+- The frontend must display the list of todos and provide a form to add new ones.
+- When a new todo is added, the list must update automatically without a page reload.
+- The application (both frontend and API) must be served on port 4821.
+
+## Implementation Hints
+- You can use Vite to build the React frontend and serve it statically from your backend server, or use a tool like `ts-node` to run a server that handles both API and SSR/static serving.
+- Use `useQuery` to fetch the todos from `/api/todos`.
+- Use `useMutation` to post new todos to `/api/todos`. On success, invalidate the query to refetch the updated list.
+- Keep the backend state in-memory for simplicity.
+
+## Acceptance Criteria
+- Project path: `/home/user/tanstack-query-todo`
+- Start command: `npm start`
+- Port: 4821
+- API Endpoints:
+  - `GET /api/todos`: Returns status 200 and a JSON array of todo objects.
+    ```json
+    [
+      {
+        "id": number,
+        "text": string,
+        "completed": boolean
+      }
+    ]
+    ```
+  - `POST /api/todos`: Accepts a JSON object and returns status 201 with the created todo object.
+    ```json
+    // Request
+    {
+      "text": string
+    }
+    // Response
+    {
+      "id": number,
+      "text": string,
+      "completed": boolean
+    }
+    ```
+- Frontend UI Requirements:
+  - The main page must be accessible at `http://localhost:4821/`.
+  - The list of todos must be rendered inside a container with `id="todo-list"`. Each todo item should be an `<li>` element containing the todo text.
+  - There must be an input field with `id="todo-input"` for entering new todo text.
+  - There must be a submit button with `id="todo-submit"` to add the todo.
+  - Submitting the form must trigger a TanStack Query mutation and update the list automatically.
+
+b:T8b0,# TanStack Router Protected Routes
+
+## Background
+Implement a simple authentication flow using TanStack Router. You need to create a public home page, a login page, and a protected dashboard page. The dashboard page should only be accessible to authenticated users.
+
+## Requirements
+- Create a new project using TanStack Router.
+- Implement a mock authentication context or state (e.g., `isAuthenticated: boolean`, default to `false`).
+- Implement route protection using TanStack Router's `beforeLoad` or a similar mechanism.
+- **Routes**:
+  - `/`: Public home page. Must contain a link with text "Go to Dashboard" pointing to `/dashboard`.
+  - `/login`: Login page. Must contain a button with text "Login" that sets the authentication state to true and redirects to `/dashboard`.
+  - `/dashboard`: Protected page. If a user is not authenticated, they must be redirected to `/login`. If authenticated, the page must display "Welcome to Dashboard" and contain a "Logout" button that sets authentication to false and redirects to `/login`.
+- The application must run on port **6382**.
+
+## Implementation Hints
+- You can use Vite with the `@tanstack/router-vite-plugin` and `@tanstack/react-router`.
+- Use the `beforeLoad` option in your route definition to check the authentication state and redirect using `throw redirect({ to: '/login' })` if not authenticated.
+- You can use React Context to manage and provide the authentication state to the router.
+
+## Acceptance Criteria
+- Project path: /home/user/project
+- Start command: npm run dev
+- Port: 6382
+- The app must serve the following routes:
+  - GET `/`: Returns the home page with a "Go to Dashboard" link.
+  - GET `/login`: Returns the login page with a "Login" button.
+  - GET `/dashboard`: If not authenticated, redirects to `/login`. If authenticated, displays "Welcome to Dashboard" and a "Logout" button.
+- A correct implementation will always pass the following test criteria:
+  1. Navigating to `/dashboard` directly without authentication redirects to `/login`.
+  2. Clicking "Login" on the `/login` page authenticates the user and redirects to `/dashboard`.
+  3. Clicking "Logout" on the `/dashboard` page deauthenticates the user and redirects to `/login`.
+
+c:T696,# Type-safe Navigation Menu with TanStack Router
+
+## Background
+Create a basic React application that uses TanStack Router to provide a type-safe navigation menu with active link highlighting.
+
+## Requirements
+- Initialize a React project using Vite and TanStack Router.
+- Create a file-based routing setup with at least three routes: Home (`/`), About (`/about`), and Contact (`/contact`).
+- Create a navigation menu component that links to these routes.
+- The navigation links must be type-safe.
+- The navigation menu must visually highlight the currently active route by applying a specific CSS class.
+- Run the application on port 4273.
+
+## Implementation Hints
+- Use `@tanstack/react-router` and its `RouterProvider`, `createRouter`, and file-based routing conventions.
+- Utilize the `<Link>` component provided by TanStack Router, which supports `activeProps` to apply properties (like a CSS class) when the link is active.
+- Be sure to configure Vite's server port to 4273 in `vite.config.ts` or `vite.config.js`.
+- Make sure the `routeTree.gen.ts` file is generated.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: npm run dev
+- Port: 4273
+- The app must serve a Home page at `/`, an About page at `/about`, and a Contact page at `/contact`.
+- The app must display a navigation menu containing links to all three routes on every page.
+- The `<Link>` component for the currently active route MUST have the CSS class `active` applied to it (e.g., `activeProps={{ className: 'active' }}`).
+- The routing must be type-safe, meaning the `routeTree.gen.ts` file must exist in the project (typically in `src/routeTree.gen.ts` or `app/routeTree.gen.ts`).
+
+d:T4c6,# TanStack Router Dynamic Parameters
+
+## Background
+Create a simple React application using TanStack Router to demonstrate file-based routing with dynamic parameters.
+
+## Requirements
+- Initialize a React project in `/home/user/myproject`.
+- Configure TanStack Router with file-based routing.
+- Create a home route (`/`) that displays "Home Page".
+- Create a dynamic route `/users/$userId` that reads the `userId` parameter and displays "User Profile: <userId>".
+- The app must run on port `8765`.
+
+## Implementation Hints
+- You can use Vite with a React TypeScript template.
+- Install `@tanstack/react-router` and `@tanstack/router-plugin` (or `@tanstack/router-vite-plugin`).
+- Configure the Vite plugin to generate the route tree automatically.
+- Create the routing files in `src/routes/`.
+- Ensure your `vite.config.ts` or package.json scripts are configured to start the dev server on port `8765`.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: npm run dev
+- Port: 8765
+- Routes to verify:
+  - GET `/`: The page must render text containing "Home Page".
+  - GET `/users/<userId>`: The page must render text containing "User Profile: <userId>" matching the dynamic parameter in the URL.
+
+e:T4c0,# TanStack Router Search Page
+
+## Background
+Build a "Search" page where all filters are synced to the URL using TanStack Router.
+
+## Requirements
+- Create a React application using TanStack Router.
+- Implement a `/search` route.
+- The page must sync the following filters to the URL search parameters: `q` (string), `category` (string), `minPrice` (number), and `maxPrice` (number).
+- The page must contain `<input>` elements for each of these filters.
+- Use port 4821 for the application.
+
+## Implementation Hints
+- You can use Vite to scaffold the React app.
+- Use `@tanstack/react-router` and its search param validation features.
+- Update your `vite.config.ts` or package.json to ensure the dev server runs on port 4821.
+
+## Acceptance Criteria
+- Project path: /home/user/project
+- Start command: npm run dev
+- Port: 4821
+- Route `/search` must exist and validate `q`, `category`, `minPrice`, and `maxPrice` as search params.
+- The page must have input fields identifiable by their `name` attributes: `q`, `category`, `minPrice`, and `maxPrice`.
+- Modifying the inputs must update the URL search parameters.
+- Loading the page with URL search parameters must populate the inputs with the corresponding values.
+
+f:T4a5,# TanStack Start Counter App
+
+## Background
+Create a full-stack "Counter" app using TanStack Start and Server Functions.
+
+## Requirements
+- Initialize a TanStack Start application.
+- Implement a counter state on the server.
+- Create a Server Function to increment the counter and return the new value.
+- The main page should display the current count and a button to increment it.
+- Ensure the app runs on port 8234.
+
+## Implementation Hints
+- Use `@tanstack/start` and `@tanstack/react-router`.
+- Use `createServerFn` to define the server-side increment logic. The counter state can be kept in an in-memory variable on the server for this simple task.
+- Call the server function from the client to interact with it.
+- Configure Vite/app to use port 8234.
+
+## Acceptance Criteria
+- Project path: /home/user/project
+- Start command: npm run dev
+- Port: 8234
+- The app must serve on port 8234.
+- The main page (`/`) must display the text `Count: 0` initially.
+- The main page must contain a button with the text `Increment`.
+- Clicking the `Increment` button must call the Server Function, increment the counter on the server, and update the UI to display the new count (e.g., `Count: 1`).
+
+10:T4a3,# Basic Data Grid with TanStack Table
+
+## Background
+Build a simple data grid using TanStack Table in a React application with static data.
+
+## Requirements
+- Create a React application with a table component using `@tanstack/react-table`.
+- Define static data with at least 3 columns (e.g., `id`, `name`, `email`) and 3 rows.
+- Render the table with `<table>`, `<thead>`, `<tbody>`, `<tr>`, `<th>`, and `<td>` HTML elements.
+- Ensure the development server runs on port `3145`.
+
+## Implementation Hints
+- You can use Vite to create the React app.
+- Use `useReactTable` and `getCoreRowModel` from `@tanstack/react-table`.
+- Map over `table.getHeaderGroups()` to render headers and `table.getRowModel().rows` to render rows.
+
+## Acceptance Criteria
+- Project path: `/home/user/project`
+- Start command: `npm run dev` (ensure it is configured to use port `3145`)
+- Port: `3145`
+- The application must be accessible at `http://localhost:3145`.
+- The page must contain a `<table>` element.
+- The table must have a `<thead>` containing the column headers (at least 3 `<th>` elements).
+- The table must have a `<tbody>` containing at least 3 rows of data (`<tr>` elements with `<td>` cells).
+
+11:T728,# Data Table with Inline Editing
+
+## Background
+Create a web application that displays a data table with inline editing capabilities using TanStack Table and TanStack Form.
+
+## Requirements
+- Initialize a React project (e.g., using Vite or Next.js).
+- Use TanStack Table to render a data grid of users (columns: ID, Name, Email, Role).
+- Implement inline editing: clicking an "Edit" button on a row should switch the row into edit mode.
+- Use TanStack Form to manage the state and validation of the inline edit form (e.g., Name is required, Email must be a valid format).
+- Provide "Save" and "Cancel" buttons when a row is in edit mode.
+- Saving should update the table data and exit edit mode. Canceling should revert changes and exit edit mode.
+- Run the application on port 5732.
+
+## Implementation Hints
+- Use `useReactTable` to manage the table state and columns.
+- You can store the editing row ID in the component state to toggle between display and edit modes.
+- For the edit mode row, wrap the inputs in a TanStack Form instance (`useForm`) to handle validation and submission.
+
+## Acceptance Criteria
+- Project path: /home/user/project
+- Start command: npm run dev
+- Port: 5732
+- Test Criteria:
+  1. The app must serve a web page on port 5732.
+  2. The table must display at least 3 initial user records containing columns for ID, Name, Email, and Role.
+  3. Each row must have an "Edit" button.
+  4. Clicking "Edit" changes the row's Name, Email, and Role cells into input fields managed by TanStack Form, and shows "Save" and "Cancel" buttons.
+  5. Submitting the form with invalid data (e.g., empty Name) should display validation errors and prevent saving.
+  6. Submitting the form with valid data should update the row's display and exit edit mode.
+  7. Clicking "Cancel" should discard changes and exit edit mode.
+
+0:{"buildId":"el09_l4TftzkIZS1L9XQV","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"min-h-screen bg-background text-foreground font-sans selection:bg-primary/20","children":[["$","div",null,{"className":"fixed inset-0 -z-10 h-full w-full bg-background bg-[radial-gradient(#2a2a2a_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20 dark:opacity-40"}],["$","$2",null,{"fallback":["$","div",null,{"className":"container mx-auto py-8 text-center","children":"Loading tasks..."}],"children":["$","$L3",null,{"tasksData":[{"taskName":"start_counter_sqlite","instruction":"$4","trials":[{"job_name":"2026-06-10__15-33-03","trial_name":"start_counter_sqlite__JbLxAGk","model":"glm-5.1","rawModel":"zai/glm-5.1","agent":"Pochi","passed":false,"reward":0,"error":true,"latency_sec":886.881,"latency_breakdown":{"env_setup":2.673,"agent_setup":13.482,"agent_exec":600.209,"verifier":242.359},"taskName":"start_counter_sqlite","jobId":"JbLxAGk","exec_duration":600.209},{"job_name":"2026-06-10__12-06-58","trial_name":"start_counter_sqlite__4cmPb2C","model":"claude-4-6-sonnet","rawModel":"anthropic/claude-4-6-sonnet","agent":"Pochi","passed":true,"reward":1,"error":true,"latency_sec":643.315,"latency_breakdown":{"env_setup":2.596,"agent_setup":13.149,"agent_exec":600.217,"verifier":9.094},"taskName":"start_counter_sqlite","jobId":"4cmPb2C","exec_duration":600.217},{"job_name":"2026-06-10__13-01-59","trial_name":"start_counter_sqlite__ytw3Qit","model":"deepseek-4-pro","rawModel":"deepseek/deepseek-4-pro","agent":"Pochi","passed":false,"reward":0,"error":true,"latency_sec":877.861,"latency_breakdown":{"env_setup":3.045,"agent_setup":14.842,"agent_exec":600.202,"verifier":241.98},"taskName":"start_counter_sqlite","jobId":"ytw3Qit","exec_duration":600.202},{"job_name":"2026-06-10__14-08-03","trial_name":"start_counter_sqlite__cCteug9","model":"gemini-3.1-pro","rawModel":"google/gemini-3.1-pro","agent":"Pochi","passed":false,"reward":0,"error":true,"latency_sec":684.931,"latency_breakdown":{"env_setup":2.678,"agent_setup":16.349,"agent_exec":600.253,"verifier":37.621},"taskName":"start_counter_sqlite","jobId":"cCteug9","exec_duration":600.253},{"job_name":"2026-06-10__11-08-21","trial_name":"start_counter_sqlite__RJmRTr7","model":"gemini-3.5-flash","rawModel":"google/gemini-3.5-flash","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":638.849,"latency_breakdown":{"env_setup":2.828,"agent_setup":13.806,"agent_exec":582.051,"verifier":11.258},"taskName":"start_counter_sqlite","jobId":"RJmRTr7","exec_duration":582.051}]},{"taskName":"tanstack-ecommerce-cart","instruction":"$5","trials":[{"job_name":"2026-06-10__15-33-03","trial_name":"tanstack-ecommerce-cart__uftZ6A9","model":"glm-5.1","rawModel":"zai/glm-5.1","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":569.563,"latency_breakdown":{"env_setup":2.699,"agent_setup":14.203,"agent_exec":351.24,"verifier":182.781},"taskName":"tanstack-ecommerce-cart","jobId":"uftZ6A9","exec_duration":351.24},{"job_name":"2026-06-10__12-06-58","trial_name":"tanstack-ecommerce-cart__Fkwd5jm","model":"claude-4-6-sonnet","rawModel":"anthropic/claude-4-6-sonnet","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":576.481,"latency_breakdown":{"env_setup":2.722,"agent_setup":14.366,"agent_exec":362.103,"verifier":181.72},"taskName":"tanstack-ecommerce-cart","jobId":"Fkwd5jm","exec_duration":362.103},{"job_name":"2026-06-10__13-01-59","trial_name":"tanstack-ecommerce-cart__Fe63o6M","model":"deepseek-4-pro","rawModel":"deepseek/deepseek-4-pro","agent":"Pochi","passed":false,"reward":0,"error":true,"latency_sec":816.449,"latency_breakdown":{"env_setup":2.577,"agent_setup":15.955,"agent_exec":600.239,"verifier":181.505},"taskName":"tanstack-ecommerce-cart","jobId":"Fe63o6M","exec_duration":600.239},{"job_name":"2026-06-10__14-08-03","trial_name":"tanstack-ecommerce-cart__AXnrUTM","model":"gemini-3.1-pro","rawModel":"google/gemini-3.1-pro","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":322.942,"latency_breakdown":{"env_setup":2.874,"agent_setup":15.043,"agent_exec":198.805,"verifier":89.381},"taskName":"tanstack-ecommerce-cart","jobId":"AXnrUTM","exec_duration":198.805},{"job_name":"2026-06-10__11-08-21","trial_name":"tanstack-ecommerce-cart__HX7aBcA","model":"gemini-3.5-flash","rawModel":"google/gemini-3.5-flash","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":438.663,"latency_breakdown":{"env_setup":2.988,"agent_setup":16.402,"agent_exec":323.325,"verifier":79.48},"taskName":"tanstack-ecommerce-cart","jobId":"HX7aBcA","exec_duration":323.325}]},{"taskName":"tanstack-form-login","instruction":"$6","trials":[{"job_name":"2026-06-10__15-33-03","trial_name":"tanstack-form-login__7Tpcfb3","model":"glm-5.1","rawModel":"zai/glm-5.1","agent":"Pochi","passed":false,"reward":null,"error":true,"latency_sec":863.376,"latency_breakdown":{"env_setup":3.887,"agent_setup":17.618,"agent_exec":224.44,"verifier":600.003},"taskName":"tanstack-form-login","jobId":"7Tpcfb3","exec_duration":224.44},{"job_name":"2026-06-10__12-06-58","trial_name":"tanstack-form-login__RcKQfzi","model":"claude-4-6-sonnet","rawModel":"anthropic/claude-4-6-sonnet","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":468.89,"latency_breakdown":{"env_setup":4.036,"agent_setup":17.204,"agent_exec":245.957,"verifier":184.012},"taskName":"tanstack-form-login","jobId":"RcKQfzi","exec_duration":245.957},{"job_name":"2026-06-10__13-01-59","trial_name":"tanstack-form-login__Yi5wRfj","model":"deepseek-4-pro","rawModel":"deepseek/deepseek-4-pro","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":815.107,"latency_breakdown":{"env_setup":4.009,"agent_setup":17.92,"agent_exec":593.453,"verifier":182.354},"taskName":"tanstack-form-login","jobId":"Yi5wRfj","exec_duration":593.453},{"job_name":"2026-06-10__14-08-03","trial_name":"tanstack-form-login__6LQZ5Wa","model":"gemini-3.1-pro","rawModel":"google/gemini-3.1-pro","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":410.302,"latency_breakdown":{"env_setup":3.755,"agent_setup":17.048,"agent_exec":69.932,"verifier":303.994},"taskName":"tanstack-form-login","jobId":"6LQZ5Wa","exec_duration":69.932},{"job_name":"2026-06-10__11-08-21","trial_name":"tanstack-form-login__9N7vq9h","model":"gemini-3.5-flash","rawModel":"google/gemini-3.5-flash","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":746.496,"latency_breakdown":{"env_setup":4.471,"agent_setup":17.339,"agent_exec":249.581,"verifier":459.157},"taskName":"tanstack-form-login","jobId":"9N7vq9h","exec_duration":249.581}]},{"taskName":"tanstack-form-wizard","instruction":"$7","trials":[{"job_name":"2026-06-10__15-33-03","trial_name":"tanstack-form-wizard__US9mT3n","model":"glm-5.1","rawModel":"zai/glm-5.1","agent":"Pochi","passed":false,"reward":0,"error":true,"latency_sec":843.405,"latency_breakdown":{"env_setup":2.814,"agent_setup":14.008,"agent_exec":600.392,"verifier":181.895},"taskName":"tanstack-form-wizard","jobId":"US9mT3n","exec_duration":600.392},{"job_name":"2026-06-10__12-06-58","trial_name":"tanstack-form-wizard__omi9ZP6","model":"claude-4-6-sonnet","rawModel":"anthropic/claude-4-6-sonnet","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":562.237,"latency_breakdown":{"env_setup":3.178,"agent_setup":13.048,"agent_exec":324.443,"verifier":181.003},"taskName":"tanstack-form-wizard","jobId":"omi9ZP6","exec_duration":324.443},{"job_name":"2026-06-10__13-01-59","trial_name":"tanstack-form-wizard__QvG2G6P","model":"deepseek-4-pro","rawModel":"deepseek/deepseek-4-pro","agent":"Pochi","passed":false,"reward":0,"error":true,"latency_sec":842.381,"latency_breakdown":{"env_setup":3.832,"agent_setup":16.217,"agent_exec":600.242,"verifier":181.195},"taskName":"tanstack-form-wizard","jobId":"QvG2G6P","exec_duration":600.242},{"job_name":"2026-06-10__14-08-03","trial_name":"tanstack-form-wizard__sLfKUaC","model":"gemini-3.1-pro","rawModel":"google/gemini-3.1-pro","agent":"Pochi","passed":true,"reward":1,"error":true,"latency_sec":783.043,"latency_breakdown":{"env_setup":4.439,"agent_setup":28.635,"agent_exec":600.204,"verifier":101.654},"taskName":"tanstack-form-wizard","jobId":"sLfKUaC","exec_duration":600.204},{"job_name":"2026-06-10__11-08-21","trial_name":"tanstack-form-wizard__sEC4FHQ","model":"gemini-3.5-flash","rawModel":"google/gemini-3.5-flash","agent":"Pochi","passed":true,"reward":1,"error":true,"latency_sec":831.366,"latency_breakdown":{"env_setup":29.995,"agent_setup":13.869,"agent_exec":600.325,"verifier":149.934},"taskName":"tanstack-form-wizard","jobId":"sEC4FHQ","exec_duration":600.325}]},{"taskName":"tanstack-query-infinite","instruction":"$8","trials":[{"job_name":"2026-06-10__15-33-03","trial_name":"tanstack-query-infinite__XpVWKXE","model":"glm-5.1","rawModel":"zai/glm-5.1","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":483.103,"latency_breakdown":{"env_setup":2.639,"agent_setup":13.696,"agent_exec":270.221,"verifier":181.985},"taskName":"tanstack-query-infinite","jobId":"XpVWKXE","exec_duration":270.221},{"job_name":"2026-06-10__12-06-58","trial_name":"tanstack-query-infinite__8Kwq9xx","model":"claude-4-6-sonnet","rawModel":"anthropic/claude-4-6-sonnet","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":468.571,"latency_breakdown":{"env_setup":2.643,"agent_setup":13.25,"agent_exec":254.241,"verifier":182.046},"taskName":"tanstack-query-infinite","jobId":"8Kwq9xx","exec_duration":254.241},{"job_name":"2026-06-10__13-01-59","trial_name":"tanstack-query-infinite__wvonysc","model":"deepseek-4-pro","rawModel":"deepseek/deepseek-4-pro","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":665.152,"latency_breakdown":{"env_setup":2.698,"agent_setup":14.076,"agent_exec":451.183,"verifier":182.275},"taskName":"tanstack-query-infinite","jobId":"wvonysc","exec_duration":451.183},{"job_name":"2026-06-10__14-08-03","trial_name":"tanstack-query-infinite__ipC24EW","model":"gemini-3.1-pro","rawModel":"google/gemini-3.1-pro","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":294.764,"latency_breakdown":{"env_setup":2.89,"agent_setup":13.37,"agent_exec":148.836,"verifier":112.678},"taskName":"tanstack-query-infinite","jobId":"ipC24EW","exec_duration":148.836},{"job_name":"2026-06-10__11-08-21","trial_name":"tanstack-query-infinite__ouvr2CA","model":"gemini-3.5-flash","rawModel":"google/gemini-3.5-flash","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":353.398,"latency_breakdown":{"env_setup":2.998,"agent_setup":14.244,"agent_exec":212.998,"verifier":106.667},"taskName":"tanstack-query-infinite","jobId":"ouvr2CA","exec_duration":212.998}]},{"taskName":"tanstack-query-products","instruction":"$9","trials":[{"job_name":"2026-06-10__15-33-03","trial_name":"tanstack-query-products__nHt4uZ3","model":"glm-5.1","rawModel":"zai/glm-5.1","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":424.892,"latency_breakdown":{"env_setup":2.658,"agent_setup":13.224,"agent_exec":213.337,"verifier":181.005},"taskName":"tanstack-query-products","jobId":"nHt4uZ3","exec_duration":213.337},{"job_name":"2026-06-10__12-06-58","trial_name":"tanstack-query-products__7SCPwC4","model":"claude-4-6-sonnet","rawModel":"anthropic/claude-4-6-sonnet","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":429.235,"latency_breakdown":{"env_setup":4.781,"agent_setup":26.204,"agent_exec":202.118,"verifier":181.028},"taskName":"tanstack-query-products","jobId":"7SCPwC4","exec_duration":202.118},{"job_name":"2026-06-10__13-01-59","trial_name":"tanstack-query-products__pBkaJDP","model":"deepseek-4-pro","rawModel":"deepseek/deepseek-4-pro","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":699.84,"latency_breakdown":{"env_setup":3.231,"agent_setup":14.166,"agent_exec":486.137,"verifier":181.022},"taskName":"tanstack-query-products","jobId":"pBkaJDP","exec_duration":486.137},{"job_name":"2026-06-10__14-08-03","trial_name":"tanstack-query-products__JyBVKdk","model":"gemini-3.1-pro","rawModel":"google/gemini-3.1-pro","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":202.377,"latency_breakdown":{"env_setup":4.08,"agent_setup":19.391,"agent_exec":88.346,"verifier":74.179},"taskName":"tanstack-query-products","jobId":"JyBVKdk","exec_duration":88.346},{"job_name":"2026-06-10__11-08-21","trial_name":"tanstack-query-products__M9FjWRC","model":"gemini-3.5-flash","rawModel":"google/gemini-3.5-flash","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":380.146,"latency_breakdown":{"env_setup":3.203,"agent_setup":15.27,"agent_exec":164.544,"verifier":181.035},"taskName":"tanstack-query-products","jobId":"M9FjWRC","exec_duration":164.544}]},{"taskName":"tanstack-query-todo","instruction":"$a","trials":[{"job_name":"2026-06-10__15-33-03","trial_name":"tanstack-query-todo__69SL64R","model":"glm-5.1","rawModel":"zai/glm-5.1","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":433.784,"latency_breakdown":{"env_setup":2.658,"agent_setup":13.313,"agent_exec":256.06,"verifier":147.468},"taskName":"tanstack-query-todo","jobId":"69SL64R","exec_duration":256.06},{"job_name":"2026-06-10__12-06-58","trial_name":"tanstack-query-todo__XiKcr6N","model":"claude-4-6-sonnet","rawModel":"anthropic/claude-4-6-sonnet","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":324.715,"latency_breakdown":{"env_setup":3.438,"agent_setup":24.507,"agent_exec":164.051,"verifier":118.49},"taskName":"tanstack-query-todo","jobId":"XiKcr6N","exec_duration":164.051},{"job_name":"2026-06-10__13-01-59","trial_name":"tanstack-query-todo__UfjBxM9","model":"deepseek-4-pro","rawModel":"deepseek/deepseek-4-pro","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":548.232,"latency_breakdown":{"env_setup":2.78,"agent_setup":15.204,"agent_exec":425.109,"verifier":90.606},"taskName":"tanstack-query-todo","jobId":"UfjBxM9","exec_duration":425.109},{"job_name":"2026-06-10__14-08-03","trial_name":"tanstack-query-todo__s6v7HP8","model":"gemini-3.1-pro","rawModel":"google/gemini-3.1-pro","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":297.036,"latency_breakdown":{"env_setup":2.744,"agent_setup":14.104,"agent_exec":84.204,"verifier":182.253},"taskName":"tanstack-query-todo","jobId":"s6v7HP8","exec_duration":84.204},{"job_name":"2026-06-10__11-08-21","trial_name":"tanstack-query-todo__ZTuDbvZ","model":"gemini-3.5-flash","rawModel":"google/gemini-3.5-flash","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":326.436,"latency_breakdown":{"env_setup":3.055,"agent_setup":14.144,"agent_exec":181.564,"verifier":109.751},"taskName":"tanstack-query-todo","jobId":"ZTuDbvZ","exec_duration":181.564}]},{"taskName":"tanstack-router-auth","instruction":"$b","trials":[{"job_name":"2026-06-10__15-33-03","trial_name":"tanstack-router-auth__rkZ58Qb","model":"glm-5.1","rawModel":"zai/glm-5.1","agent":"Pochi","passed":true,"reward":1,"error":true,"latency_sec":457.836,"latency_breakdown":{"env_setup":3.554,"agent_setup":16.503,"agent_exec":250.586,"verifier":171.616},"taskName":"tanstack-router-auth","jobId":"rkZ58Qb","exec_duration":250.586},{"job_name":"2026-06-10__12-06-58","trial_name":"tanstack-router-auth__HtppkdD","model":"claude-4-6-sonnet","rawModel":"anthropic/claude-4-6-sonnet","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":440.821,"latency_breakdown":{"env_setup":3.558,"agent_setup":18.148,"agent_exec":218.702,"verifier":181.77},"taskName":"tanstack-router-auth","jobId":"HtppkdD","exec_duration":218.702},{"job_name":"2026-06-10__13-01-59","trial_name":"tanstack-router-auth__DgQf46j","model":"deepseek-4-pro","rawModel":"deepseek/deepseek-4-pro","agent":"Pochi","passed":false,"reward":0,"error":true,"latency_sec":820.187,"latency_breakdown":{"env_setup":3.656,"agent_setup":18.763,"agent_exec":600.235,"verifier":181.246},"taskName":"tanstack-router-auth","jobId":"DgQf46j","exec_duration":600.235},{"job_name":"2026-06-10__14-08-03","trial_name":"tanstack-router-auth__BJNdqyu","model":"gemini-3.1-pro","rawModel":"google/gemini-3.1-pro","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":380.516,"latency_breakdown":{"env_setup":3.27,"agent_setup":17.865,"agent_exec":92.38,"verifier":250.596},"taskName":"tanstack-router-auth","jobId":"BJNdqyu","exec_duration":92.38},{"job_name":"2026-06-10__11-08-21","trial_name":"tanstack-router-auth__bS6mbSV","model":"gemini-3.5-flash","rawModel":"google/gemini-3.5-flash","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":706.136,"latency_breakdown":{"env_setup":3.754,"agent_setup":17.882,"agent_exec":210.373,"verifier":460.123},"taskName":"tanstack-router-auth","jobId":"bS6mbSV","exec_duration":210.373}]},{"taskName":"tanstack-router-nav","instruction":"$c","trials":[{"job_name":"2026-06-10__15-33-03","trial_name":"tanstack-router-nav__moVPbmu","model":"glm-5.1","rawModel":"zai/glm-5.1","agent":"Pochi","passed":false,"reward":0,"error":true,"latency_sec":537.055,"latency_breakdown":{"env_setup":2.626,"agent_setup":13.961,"agent_exec":320.158,"verifier":182.433},"taskName":"tanstack-router-nav","jobId":"moVPbmu","exec_duration":320.158},{"job_name":"2026-06-10__12-06-58","trial_name":"tanstack-router-nav__CUhdQnK","model":"claude-4-6-sonnet","rawModel":"anthropic/claude-4-6-sonnet","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":514.93,"latency_breakdown":{"env_setup":2.751,"agent_setup":14.78,"agent_exec":298.067,"verifier":182.249},"taskName":"tanstack-router-nav","jobId":"CUhdQnK","exec_duration":298.067},{"job_name":"2026-06-10__13-01-59","trial_name":"tanstack-router-nav__jZhin6c","model":"deepseek-4-pro","rawModel":"deepseek/deepseek-4-pro","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":761.462,"latency_breakdown":{"env_setup":2.758,"agent_setup":13.748,"agent_exec":545.839,"verifier":182.462},"taskName":"tanstack-router-nav","jobId":"jZhin6c","exec_duration":545.839},{"job_name":"2026-06-10__14-08-03","trial_name":"tanstack-router-nav__pSzTyCS","model":"gemini-3.1-pro","rawModel":"google/gemini-3.1-pro","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":356.346,"latency_breakdown":{"env_setup":3.237,"agent_setup":12.997,"agent_exec":127.552,"verifier":195.142},"taskName":"tanstack-router-nav","jobId":"pSzTyCS","exec_duration":127.552},{"job_name":"2026-06-10__11-08-21","trial_name":"tanstack-router-nav__V2NJmqh","model":"gemini-3.5-flash","rawModel":"google/gemini-3.5-flash","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":583.103,"latency_breakdown":{"env_setup":4.782,"agent_setup":25.712,"agent_exec":205.591,"verifier":329.122},"taskName":"tanstack-router-nav","jobId":"V2NJmqh","exec_duration":205.591}]},{"taskName":"tanstack-router-params","instruction":"$d","trials":[{"job_name":"2026-06-10__15-33-03","trial_name":"tanstack-router-params__YTkeuHt","model":"glm-5.1","rawModel":"zai/glm-5.1","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":461.245,"latency_breakdown":{"env_setup":2.77,"agent_setup":14.106,"agent_exec":247.231,"verifier":181.242},"taskName":"tanstack-router-params","jobId":"YTkeuHt","exec_duration":247.231},{"job_name":"2026-06-10__12-06-58","trial_name":"tanstack-router-params__QEM2mHn","model":"claude-4-6-sonnet","rawModel":"anthropic/claude-4-6-sonnet","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":426.358,"latency_breakdown":{"env_setup":2.864,"agent_setup":15.538,"agent_exec":210.373,"verifier":181.169},"taskName":"tanstack-router-params","jobId":"QEM2mHn","exec_duration":210.373},{"job_name":"2026-06-10__13-01-59","trial_name":"tanstack-router-params__3NTGrNs","model":"deepseek-4-pro","rawModel":"deepseek/deepseek-4-pro","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":719.669,"latency_breakdown":{"env_setup":2.774,"agent_setup":16.541,"agent_exec":503.717,"verifier":181.519},"taskName":"tanstack-router-params","jobId":"3NTGrNs","exec_duration":503.717},{"job_name":"2026-06-10__14-08-03","trial_name":"tanstack-router-params__rcyURxf","model":"gemini-3.1-pro","rawModel":"google/gemini-3.1-pro","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":435.056,"latency_breakdown":{"env_setup":2.953,"agent_setup":14.035,"agent_exec":227.389,"verifier":173.043},"taskName":"tanstack-router-params","jobId":"rcyURxf","exec_duration":227.389},{"job_name":"2026-06-10__11-08-21","trial_name":"tanstack-router-params__gAc9Bgu","model":"gemini-3.5-flash","rawModel":"google/gemini-3.5-flash","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":427.531,"latency_breakdown":{"env_setup":2.586,"agent_setup":13.938,"agent_exec":225.29,"verifier":168.924},"taskName":"tanstack-router-params","jobId":"gAc9Bgu","exec_duration":225.29}]},{"taskName":"tanstack-router-search","instruction":"$e","trials":[{"job_name":"2026-06-10__15-33-03","trial_name":"tanstack-router-search__oEDqcak","model":"glm-5.1","rawModel":"zai/glm-5.1","agent":"Pochi","passed":false,"reward":0,"error":true,"latency_sec":464.181,"latency_breakdown":{"env_setup":3.577,"agent_setup":17.059,"agent_exec":243.059,"verifier":181.241},"taskName":"tanstack-router-search","jobId":"oEDqcak","exec_duration":243.059},{"job_name":"2026-06-10__12-06-58","trial_name":"tanstack-router-search__rpWfvNu","model":"claude-4-6-sonnet","rawModel":"anthropic/claude-4-6-sonnet","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":471.455,"latency_breakdown":{"env_setup":4.155,"agent_setup":16.195,"agent_exec":250.95,"verifier":181.74},"taskName":"tanstack-router-search","jobId":"rpWfvNu","exec_duration":250.95},{"job_name":"2026-06-10__13-01-59","trial_name":"tanstack-router-search__XW9V5FD","model":"deepseek-4-pro","rawModel":"deepseek/deepseek-4-pro","agent":"Pochi","passed":false,"reward":0,"error":true,"latency_sec":824.45,"latency_breakdown":{"env_setup":4.083,"agent_setup":18.492,"agent_exec":600.221,"verifier":181.269},"taskName":"tanstack-router-search","jobId":"XW9V5FD","exec_duration":600.221},{"job_name":"2026-06-10__14-08-03","trial_name":"tanstack-router-search__NaiBNpU","model":"gemini-3.1-pro","rawModel":"google/gemini-3.1-pro","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":395.35,"latency_breakdown":{"env_setup":3.862,"agent_setup":16.514,"agent_exec":177.697,"verifier":181.105},"taskName":"tanstack-router-search","jobId":"NaiBNpU","exec_duration":177.697},{"job_name":"2026-06-10__11-08-21","trial_name":"tanstack-router-search__CniTrbp","model":"gemini-3.5-flash","rawModel":"google/gemini-3.5-flash","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":469.616,"latency_breakdown":{"env_setup":4.179,"agent_setup":18.636,"agent_exec":196.513,"verifier":235.071},"taskName":"tanstack-router-search","jobId":"CniTrbp","exec_duration":196.513}]},{"taskName":"tanstack-start-counter","instruction":"$f","trials":[{"job_name":"2026-06-10__15-33-03","trial_name":"tanstack-start-counter__RANLhW8","model":"glm-5.1","rawModel":"zai/glm-5.1","agent":"Pochi","passed":false,"reward":0,"error":true,"latency_sec":819.969,"latency_breakdown":{"env_setup":3.724,"agent_setup":16.847,"agent_exec":600.228,"verifier":181.032},"taskName":"tanstack-start-counter","jobId":"RANLhW8","exec_duration":600.228},{"job_name":"2026-06-10__12-06-58","trial_name":"tanstack-start-counter__mfTH4Te","model":"claude-4-6-sonnet","rawModel":"anthropic/claude-4-6-sonnet","agent":"Pochi","passed":false,"reward":0,"error":true,"latency_sec":824.201,"latency_breakdown":{"env_setup":4.034,"agent_setup":16.833,"agent_exec":600.298,"verifier":181.285},"taskName":"tanstack-start-counter","jobId":"mfTH4Te","exec_duration":600.298},{"job_name":"2026-06-10__13-01-59","trial_name":"tanstack-start-counter__m4nGfbz","model":"deepseek-4-pro","rawModel":"deepseek/deepseek-4-pro","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":833.688,"latency_breakdown":{"env_setup":3.861,"agent_setup":18.588,"agent_exec":599.064,"verifier":181.065},"taskName":"tanstack-start-counter","jobId":"m4nGfbz","exec_duration":599.064},{"job_name":"2026-06-10__14-08-03","trial_name":"tanstack-start-counter__m9gKWyP","model":"gemini-3.1-pro","rawModel":"google/gemini-3.1-pro","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":496.267,"latency_breakdown":{"env_setup":3.666,"agent_setup":17.091,"agent_exec":272.635,"verifier":181.025},"taskName":"tanstack-start-counter","jobId":"m9gKWyP","exec_duration":272.635},{"job_name":"2026-06-10__11-08-21","trial_name":"tanstack-start-counter__pxxQFez","model":"gemini-3.5-flash","rawModel":"google/gemini-3.5-flash","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":659.572,"latency_breakdown":{"env_setup":3.845,"agent_setup":17.305,"agent_exec":361.036,"verifier":259.646},"taskName":"tanstack-start-counter","jobId":"pxxQFez","exec_duration":361.036}]},{"taskName":"tanstack-table-basic","instruction":"$10","trials":[{"job_name":"2026-06-10__15-33-03","trial_name":"tanstack-table-basic__aNTZVXw","model":"glm-5.1","rawModel":"zai/glm-5.1","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":426.343,"latency_breakdown":{"env_setup":3.535,"agent_setup":17.516,"agent_exec":208.132,"verifier":181.235},"taskName":"tanstack-table-basic","jobId":"aNTZVXw","exec_duration":208.132},{"job_name":"2026-06-10__12-06-58","trial_name":"tanstack-table-basic__XGkukA9","model":"claude-4-6-sonnet","rawModel":"anthropic/claude-4-6-sonnet","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":424.789,"latency_breakdown":{"env_setup":3.651,"agent_setup":16.699,"agent_exec":206.151,"verifier":181.696},"taskName":"tanstack-table-basic","jobId":"XGkukA9","exec_duration":206.151},{"job_name":"2026-06-10__13-01-59","trial_name":"tanstack-table-basic__GffTrMj","model":"deepseek-4-pro","rawModel":"deepseek/deepseek-4-pro","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":532.274,"latency_breakdown":{"env_setup":3.698,"agent_setup":18.413,"agent_exec":311.845,"verifier":181.689},"taskName":"tanstack-table-basic","jobId":"GffTrMj","exec_duration":311.845},{"job_name":"2026-06-10__14-08-03","trial_name":"tanstack-table-basic__pxsgz3T","model":"gemini-3.1-pro","rawModel":"google/gemini-3.1-pro","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":251.132,"latency_breakdown":{"env_setup":3.49,"agent_setup":16.195,"agent_exec":151.758,"verifier":64.786},"taskName":"tanstack-table-basic","jobId":"pxsgz3T","exec_duration":151.758},{"job_name":"2026-06-10__11-08-21","trial_name":"tanstack-table-basic__HAHxkHH","model":"gemini-3.5-flash","rawModel":"google/gemini-3.5-flash","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":424.135,"latency_breakdown":{"env_setup":115.488,"agent_setup":14.533,"agent_exec":162.701,"verifier":115.219},"taskName":"tanstack-table-basic","jobId":"HAHxkHH","exec_duration":162.701}]},{"taskName":"tanstack-table-editable","instruction":"$11","trials":[{"job_name":"2026-06-10__15-33-03","trial_name":"tanstack-table-editable__33Wmehp","model":"glm-5.1","rawModel":"zai/glm-5.1","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":714.621,"latency_breakdown":{"env_setup":4.887,"agent_setup":27.611,"agent_exec":386.23,"verifier":279.5},"taskName":"tanstack-table-editable","jobId":"33Wmehp","exec_duration":386.23},{"job_name":"2026-06-10__12-06-58","trial_name":"tanstack-table-editable__ruGquuq","model":"claude-4-6-sonnet","rawModel":"anthropic/claude-4-6-sonnet","agent":"Pochi","passed":true,"reward":1,"error":false,"latency_sec":472.907,"latency_breakdown":{"env_setup":2.584,"agent_setup":13.586,"agent_exec":276.139,"verifier":163.22},"taskName":"tanstack-table-editable","jobId":"ruGquuq","exec_duration":276.139},{"job_name":"2026-06-10__13-01-59","trial_name":"tanstack-table-editable__mcQEG86","model":"deepseek-4-pro","rawModel":"deepseek/deepseek-4-pro","agent":"Pochi","passed":false,"reward":0,"error":true,"latency_sec":827.417,"latency_breakdown":{"env_setup":4.577,"agent_setup":26.382,"agent_exec":600.21,"verifier":180.976},"taskName":"tanstack-table-editable","jobId":"mcQEG86","exec_duration":600.21},{"job_name":"2026-06-10__14-08-03","trial_name":"tanstack-table-editable__xVdutrG","model":"gemini-3.1-pro","rawModel":"google/gemini-3.1-pro","agent":"Pochi","passed":false,"reward":0,"error":false,"latency_sec":399.443,"latency_breakdown":{"env_setup":4.515,"agent_setup":27.463,"agent_exec":178.724,"verifier":171.138},"taskName":"tanstack-table-editable","jobId":"xVdutrG","exec_duration":178.724},{"job_name":"2026-06-10__11-08-21","trial_name":"tanstack-table-editable__7CvdQJj","model":"gemini-3.5-flash","rawModel":"google/gemini-3.5-flash","agent":"Pochi","passed":false,"reward":null,"error":true,"latency_sec":921.757,"latency_breakdown":{"env_setup":2.749,"agent_setup":13.892,"agent_exec":289.016,"verifier":600.003},"taskName":"tanstack-table-editable","jobId":"7CvdQJj","exec_duration":289.016}]}]}]}]]}],["$L12","$L13"],"$L14"]}],"loading":null,"isPartial":false}
+12:["$","script","script-0",{"src":"/tanstack-benchmark/_next/static/chunks/31dcb01f687dbe0f.js","async":true}]
+13:["$","script","script-1",{"src":"/tanstack-benchmark/_next/static/chunks/f9f579c42c486944.js","async":true}]
+14:["$","$L15",null,{"children":["$","$2",null,{"name":"Next.MetadataOutlet","children":"$@16"}]}]
+16:null
